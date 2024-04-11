@@ -23,6 +23,7 @@ public class MainMenuController extends JPanel {
         this.view = view;
         view.getHighScoreButton().addActionListener(new HighScoreButtonListener());
         view.getInstructionsButton().addActionListener(new InstructionsButtonListener());
+        view.getStartButton().addActionListener(new StartButtonListener());
     }
 
             
@@ -39,6 +40,14 @@ public class MainMenuController extends JPanel {
 
         public void actionPerformed(ActionEvent e) {
             view.showInstrctionsView();
+        }
+        
+    }
+    public class StartButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.showGame();
         }
         
     }

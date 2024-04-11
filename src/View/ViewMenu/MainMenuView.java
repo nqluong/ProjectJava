@@ -5,12 +5,14 @@ import Controller.ControllerMenu.InstructionsController;
 import Controller.ControllerMenu.MainMenuController;
 import javax.swing.*;
 import java.awt.*;
+import view.CarGameView;
 
 public class MainMenuView extends JFrame {
 
     private JPanel mainMenuPanel;
     private JButton highScoreButton;
     private JButton instructionsButton;
+    private JButton startButton;
 
     public MainMenuView() {
         setTitle("Racing UTC");
@@ -52,7 +54,7 @@ public class MainMenuView extends JFrame {
         titleLabel.setBounds(250, 30, 160, 30);
 
         // Tạo nút bắt đầu
-        JButton startButton = createButton("Bắt đầu", "Image/button.jpg");
+        startButton = createButton("Bắt đầu", "Image/button.jpg");
         startButton.setBounds(262, 100, 116, 40);
 
         // Tạo nút điểm cao
@@ -92,6 +94,11 @@ public class MainMenuView extends JFrame {
         button.setFocusPainted(false);
         button.setOpaque(false);
         return button;
+    }
+    public void showGame(){
+        dispose();
+        CarGameView gameView = new CarGameView();
+        gameView.setVisible(true);
     }
     //gọi giao diện điểm cao
     public void showHighScoreView() {
@@ -133,4 +140,12 @@ public class MainMenuView extends JFrame {
         return mainMenuPanel;
     }
 
+    public JButton getStartButton() {
+        return startButton;
+    }
+
+    public void setStartButton(JButton startButton) {
+        this.startButton = startButton;
+    }
+    
 }
