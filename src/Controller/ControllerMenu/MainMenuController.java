@@ -51,5 +51,4 @@ public class MainMenuController extends JPanel {
         }
         
     }
-    
-}
+}    
