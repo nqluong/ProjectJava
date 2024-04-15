@@ -5,7 +5,7 @@ import Controller.ControllerMenu.InstructionsController;
 import Controller.ControllerMenu.MainMenuController;
 import javax.swing.*;
 import java.awt.*;
-import view.CarGameView;
+import View.Game.CarGameView;
 
 public class MainMenuView extends JFrame {
 
