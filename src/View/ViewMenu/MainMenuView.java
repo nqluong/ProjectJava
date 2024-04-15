@@ -1,8 +1,9 @@
 package View.ViewMenu;
 
+import Controller.ControllerGame.CarController;
 import Controller.ControllerMenu.HighScoreController;
 import Controller.ControllerMenu.InstructionsController;
-import Controller.ControllerMenu.MainMenuController;
+import Controller.ControllerGame.CarController;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.CarGameView;
@@ -39,7 +40,7 @@ public class MainMenuView extends JFrame {
                 super.paintComponent(g);
                 // Vẽ hình nền
 
-                ImageIcon icon = new ImageIcon("Image/background.jpg");
+                ImageIcon icon = new ImageIcon("Image/NenCar_01.png");
                 if (icon.getImageLoadStatus() != java.awt.MediaTracker.ERRORED) {
                     g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
                 } else {
@@ -54,15 +55,15 @@ public class MainMenuView extends JFrame {
         titleLabel.setBounds(250, 30, 160, 30);
 
         // Tạo nút bắt đầu
-        startButton = createButton("Bắt đầu", "Image/button.jpg");
+        startButton = createButton("Bắt đầu", "Image/button_02.png");
         startButton.setBounds(262, 100, 116, 40);
 
         // Tạo nút điểm cao
-        highScoreButton = createButton("Điểm cao", "Image/button.jpg");
+        highScoreButton = createButton("Điểm cao", "Image/button_02.png");
         highScoreButton.setBounds(262, 180, 116, 40);
 
         // Tạo nút hướng dẫn
-        instructionsButton = createButton("Hướng dẫn", "Image/button.jpg");
+        instructionsButton = createButton("Hướng dẫn", "Image/button_02.png");
         instructionsButton.setBounds(262, 260, 116, 40);
 
         mainMenuPanel.setLayout(null);
@@ -98,6 +99,8 @@ public class MainMenuView extends JFrame {
     public void showGame(){
         dispose();
         CarGameView gameView = new CarGameView();
+        CarController carController = new CarController(gameView);
+        carController.start();
         gameView.setVisible(true);
     }
     //gọi giao diện điểm cao

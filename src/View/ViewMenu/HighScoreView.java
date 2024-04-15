@@ -29,7 +29,7 @@ public class HighScoreView extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Vẽ hình nền
-                ImageIcon icon = new ImageIcon("Image/background.jpg");
+                ImageIcon icon = new ImageIcon("Image/nenCar_02.jpg");
                 if (icon.getImageLoadStatus() != java.awt.MediaTracker.ERRORED) {
                     g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
                 } else {
@@ -53,7 +53,7 @@ public class HighScoreView extends JFrame {
         scoreLabel.setBounds(400, 100, 100, 30);
         
         // Tạo nút trang chủ
-        homeButton = createButton("Trang chủ", "Image/button.jpg");
+        homeButton = createButton("Trang chủ", "Image/button_02.png");
         homeButton.setBounds(262, 260, 116, 40);
         
         highScorePanel.add(playerLabel);

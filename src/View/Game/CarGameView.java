@@ -166,10 +166,10 @@ public class CarGameView extends JFrame {
         }
     }
 
-    public static void main(String[] args) {
-        CarGameView view = new CarGameView();
-        CarController  carController = new CarController(view);
-        view.setVisible(true);
-        carController.start();
-    }
+//    public static void main(String[] args) {
+//        CarGameView view = new CarGameView();
+//        CarController  carController = new CarController(view);
+//        view.setVisible(true);
+//        carController.start();
+//    }
 }

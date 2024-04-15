@@ -26,7 +26,7 @@ public class InstructionsView extends JFrame {
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
                 // Vẽ hình nền
-                ImageIcon icon = new ImageIcon("Image/background.jpg");
+                ImageIcon icon = new ImageIcon("Image/nenCar_02.jpg");
                 if (icon.getImageLoadStatus() != java.awt.MediaTracker.ERRORED) {
                     g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
                 } else {
@@ -49,7 +49,7 @@ public class InstructionsView extends JFrame {
         instruction2Label.setBounds(260, 160, 180, 20);
         
         // Tạo nút trang chủ
-        homeButton = createButton("Trang chủ", "Image/button.jpg");
+        homeButton = createButton("Trang chủ", "Image/button_02.png");
         homeButton.setBounds(262, 260, 116, 40);
 
         instructionsPanel.add(homeButton);
