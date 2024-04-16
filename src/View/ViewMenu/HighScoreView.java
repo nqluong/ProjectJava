@@ -1,91 +1,41 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package View.ViewMenu;
 
 import Controller.ControllerMenu.HighScoreController;
 import javax.swing.*;
 import java.awt.*;
+import View.Game.*;
 
-/**
- *
- * @author nguye
- */
-public class HighScoreView extends JFrame {
+public class HighScoreView extends ImageFactory {
+    private JFrame jFrame;
     private JPanel highScorePanel;
     private JButton homeButton;
+    private JLabel playerLabel, scoreLabel;
     
     public HighScoreView() {
-        setTitle("Điểm cao");
-        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        setSize(640, 700);
-        setResizable(false);
-        setLocationRelativeTo(null);
+        this.init();
+        jFrame.setVisible(true);
+    }
+    
+    private void init(){
+        jFrame = new JFrame();
+        jFrame.setTitle("Điểm cao");
+        jFrame.setSize(640, 700);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(null);
         
-        // Tạo một JPanel để chứa hình nền và văn bản điểm cao
-        highScorePanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Vẽ hình nền
-                ImageIcon icon = new ImageIcon("Image/nenCar_02.jpg");
-                if (icon.getImageLoadStatus() != java.awt.MediaTracker.ERRORED) {
-                    g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                } else {
-                    System.err.println("Error loading image: background");
-                }
-            }
-        };
-        highScorePanel.setLayout(null);
-
-        // Tạo văn bản người chơi
-        JLabel playerLabel = new JLabel("Người chơi");
-        playerLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        playerLabel.setForeground(Color.WHITE);
-        playerLabel.setBounds(100, 100, 100, 30);
+        highScorePanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
         
-
-        // Tạo văn bản điểm số
-        JLabel scoreLabel = new JLabel("Điểm số");
-        scoreLabel.setFont(new Font("Arial", Font.BOLD, 16));
-        scoreLabel.setForeground(Color.WHITE);
-        scoreLabel.setBounds(400, 100, 100, 30);
-        
-        // Tạo nút trang chủ
-        homeButton = createButton("Trang chủ", "Image/button_02.png");
-        homeButton.setBounds(262, 260, 116, 40);
+        playerLabel = createImageLabel("Người chơi", "", 100, 100, 100, 30);
+        scoreLabel = createImageLabel("Điểm số", "", 400, 100, 100, 30);
+        homeButton = createButton("Trang chủ", "Image/Button_01.png", 262, 260, 116, 40);
         
         highScorePanel.add(playerLabel);
         highScorePanel.add(scoreLabel);
         highScorePanel.add(homeButton);
         
-        add(highScorePanel);
-        
-    }
-
-    private JButton createButton(String text, String imagebuttonjpg) {
-        JButton button = new JButton() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Vẽ hình ảnh nút
-                ImageIcon icon = new ImageIcon(imagebuttonjpg);
-                g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                // Vẽ văn bản trên hình ảnh nút
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Arial", Font.BOLD, 16));
-                FontMetrics fm = g.getFontMetrics();
-                int x = (getWidth() - fm.stringWidth(text)) / 2;
-                int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g.drawString(text, x, y);
-            }
-        };
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        return button;
+        jFrame.add(highScorePanel);
     }
 
     public JButton getHomeButton() {
@@ -95,6 +45,15 @@ public class HighScoreView extends JFrame {
     public void setHomeButton(JButton homeButton) {
         this.homeButton = homeButton;
     }
+    public void setVisible(boolean b) {
+        jFrame.setVisible(true);
+    } 
+    public static void main(String[] args) {
+        new HighScoreView();
+    }
 
+    public void dispose() {
+        jFrame.dispose();
+    }
 }
 

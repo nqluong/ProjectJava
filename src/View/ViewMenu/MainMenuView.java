@@ -6,98 +6,47 @@ import Controller.ControllerMenu.InstructionsController;
 import Controller.ControllerGame.CarController;
 import javax.swing.*;
 import java.awt.*;
-import View.Game.CarGameView;
+import View.Game.*;
 
-public class MainMenuView extends JFrame {
+public class MainMenuView extends ImageFactory {
 
+    private JFrame jFrame;
     private JPanel mainMenuPanel;
-    private JButton highScoreButton;
-    private JButton instructionsButton;
-    private JButton startButton;
+    private JButton highScoreButton, instructionsButton, startButton;
 
     public MainMenuView() {
-        setTitle("Racing UTC");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        // Tạo giao diện trang chủ
-        createMainMenuPanel();
-
-        // Thêm giao diện trang chủ vào JFrame
-        add(mainMenuPanel);
-
-        // Đặt kích thước cửa sổ JFrame là 640, 340 (thêm 20 pixel chiều cao cho thanh tiêu đề)
-        setSize(640, 700);
-        setLocationRelativeTo(null);
-        setVisible(true);
-
-    }
-
-    ;
-    private void createMainMenuPanel() {
-        mainMenuPanel = new JPanel() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Vẽ hình nền
-
-                ImageIcon icon = new ImageIcon("Image/NenCar_01.png");
-                if (icon.getImageLoadStatus() != java.awt.MediaTracker.ERRORED) {
-                    g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                } else {
-                    System.err.println("Error loading image: background.png");
-                }
-            }
-        };
+        this.init();
+        jFrame.setVisible(true);
+    };
+    
+    private void init() {
+        jFrame = new JFrame();
+        jFrame.setTitle("Racing UTC");
+        jFrame.setSize(640, 700);
+        jFrame.setLocationRelativeTo(null);
+        jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        jFrame.setLayout(null);
+        
+        mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
 
         JLabel titleLabel = new JLabel("Racing 2D");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(250, 30, 160, 30);
+        
+        startButton = createButton("Bắt đầu", "Image/Button_01.png", 262, 100, 116, 40);
+        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 262, 180, 116, 40);
+        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 262, 260, 116, 40);
 
-        // Tạo nút bắt đầu
-        startButton = createButton("Bắt đầu", "Image/button_02.png");
-        startButton.setBounds(262, 100, 116, 40);
-
-        // Tạo nút điểm cao
-        highScoreButton = createButton("Điểm cao", "Image/button_02.png");
-        highScoreButton.setBounds(262, 180, 116, 40);
-
-        // Tạo nút hướng dẫn
-        instructionsButton = createButton("Hướng dẫn", "Image/button_02.png");
-        instructionsButton.setBounds(262, 260, 116, 40);
-
-        mainMenuPanel.setLayout(null);
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);
         mainMenuPanel.add(highScoreButton);
         mainMenuPanel.add(instructionsButton);
+        jFrame.add(mainMenuPanel);
     }
 
-    private JButton createButton(String text, String imagePath) {
-        JButton button = new JButton() {
-            @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                // Vẽ hình ảnh nút
-                ImageIcon icon = new ImageIcon(imagePath);
-                g.drawImage(icon.getImage(), 0, 0, getWidth(), getHeight(), this);
-                // Vẽ văn bản trên hình ảnh nút
-                g.setColor(Color.WHITE);
-                g.setFont(new Font("Arial", Font.BOLD, 16));
-                FontMetrics fm = g.getFontMetrics();
-                int x = (getWidth() - fm.stringWidth(text)) / 2;
-                int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g.drawString(text, x, y);
-            }
-        };
-        button.setBorderPainted(false);
-        button.setContentAreaFilled(false);
-        button.setFocusPainted(false);
-        button.setOpaque(false);
-        return button;
-    }
     public void showGame(){
-        dispose();
+        jFrame.dispose();
         CarGameView gameView = new CarGameView();
         CarController carController = new CarController(gameView);
         carController.start();
@@ -105,7 +54,7 @@ public class MainMenuView extends JFrame {
     }
     //gọi giao diện điểm cao
     public void showHighScoreView() {
-        dispose();
+        jFrame.dispose();
         HighScoreView highview = new HighScoreView();
         //tạo controller điểm cao để xử lý các sự kiện trong giao diện điểm cao
         HighScoreController highScoreController = new HighScoreController(highview);
@@ -113,7 +62,7 @@ public class MainMenuView extends JFrame {
     }
     //gọi giao diện hướng dẫn
     public void showInstrctionsView() {
-        dispose();
+        jFrame.dispose();
         InstructionsView instructionsView = new InstructionsView();
         InstructionsController instructionsController = new InstructionsController(instructionsView);
         instructionsView.setVisible(true);
@@ -136,7 +85,7 @@ public class MainMenuView extends JFrame {
     }
     //gọi giao diện menu
     public void showMainMenu() {
-        setVisible(true);
+        jFrame.setVisible(true);
     }
 
     public JPanel getMainMenuPanel() {
@@ -149,6 +98,9 @@ public class MainMenuView extends JFrame {
 
     public void setStartButton(JButton startButton) {
         this.startButton = startButton;
+    }
+    public void dispose() {
+        jFrame.dispose();
     }
     
 }
