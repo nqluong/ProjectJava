@@ -137,5 +137,6 @@ public class CarGameView extends ImageFactory {
         Obstacles obstacles = new Obstacles(view);
         Scanner sc = new Scanner(System.in);
         if(sc.nextInt() == 1) obstacles.stopGame();
+      
     }
 }

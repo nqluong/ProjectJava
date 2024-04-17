@@ -36,4 +36,9 @@ public class Obstacles {
             obstacle.stopRunning();
         }
     }
+    public void continueGame(){
+        for (Obstacle obstacle : obstacles) {
+            obstacle.countinueRunning();
+        }
+    }
 }

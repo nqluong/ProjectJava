@@ -55,4 +55,8 @@ public class Obstacle extends Thread {
         running = false;
         label.setLocation(label.getX(),label.getY());
     }
+    public void countinueRunning(){
+        this.running = true;
+        label.setLocation(label.getX(), label.getY());
+    }
 }
