@@ -134,7 +134,5 @@ public class CarGameView extends ImageFactory {
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
         Obstacles obstacles = new Obstacles(view);
-       
-
     }
 }
