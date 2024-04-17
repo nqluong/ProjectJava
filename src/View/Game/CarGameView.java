@@ -18,6 +18,7 @@ import javax.swing.SwingUtilities;
 import View.Game.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.Scanner;
 
 public class CarGameView extends ImageFactory {
 
@@ -134,5 +135,7 @@ public class CarGameView extends ImageFactory {
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
         Obstacles obstacles = new Obstacles(view);
+        Scanner sc = new Scanner(System.in);
+        if(sc.nextInt() == 1) obstacles.stopGame();
     }
 }
