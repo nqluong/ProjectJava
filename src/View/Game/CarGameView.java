@@ -1,6 +1,9 @@
 package View.Game;
 
 import Controller.ControllerGame.CarController;
+import Model.ModelGame.Obstacle;
+import Model.ModelGame.CarModel;
+import Model.ModelGame.Obstacles;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,9 +16,11 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import View.Game.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 public class CarGameView extends ImageFactory {
-
+    private CarModel carModel;
     private JFrame jFrame;
     private JPanel jPanel_Center, jPanel_Left, jPanel_Right;
     private JButton jButton_Pause;
@@ -25,8 +30,9 @@ public class CarGameView extends ImageFactory {
 
     public CarGameView() {
         this.init();
+         carModel = new CarModel(jLabel_Car);
         jFrame.setVisible(true);
-//        CarController carController = new CarController(jLabel_Road);
+//        Obstacle carController = new Obstacle(jLabel_Road);
 //        carController.startAnimation();
     }
 
@@ -45,7 +51,8 @@ public class CarGameView extends ImageFactory {
         jLabel_Road = new RoadLabel("Image/Road.png");
         jLabel_Road.setSize(320, 700);
         jLabel_Road.setLayout(null);
-        jLabel_Car = createImageLabel("", "Image/Car_01.png", 25, 530, 50, 80);
+        jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 50, 80);
+  
         jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
         jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 183, 200, 50, 80);
         jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 247, 200, 50, 30);
@@ -71,7 +78,21 @@ public class CarGameView extends ImageFactory {
         jFrame.add(jPanel_Center);
         jFrame.add(jPanel_Left);
         jFrame.add(jPanel_Right);
+        KeyListener kl = new CarController(this);
+        jFrame.setFocusable(true);
+        jFrame.addKeyListener(kl);
+                };
 
+    public JLabel getjLabel_Coin() {
+        return jLabel_Coin;
+    }
+
+    public JLabel getjLabel_Barrier_Car() {
+        return jLabel_Barrier_Car;
+    }
+
+    public JLabel getjLabel_Barrier_Fence() {
+        return jLabel_Barrier_Fence;
     }
 
     public int getCarY() {
@@ -109,14 +130,31 @@ public class CarGameView extends ImageFactory {
     public void setBarrierFenceLocation(int y) {
         jLabel_Barrier_Fence.setLocation(jLabel_Barrier_Fence.getX(), y);
     }
-
+    public void setObstacleLocation(JLabel jLabel, int x,int y){
+        jLabel.setLocation(x, y);
+    }
     public void setVisible(boolean b) {
         jFrame.setVisible(true);
     }
+    
+    public int getCarX(){
+        return jLabel_Car.getX();
+    }
+    public void moveLeft(){
+        this.carModel.moveLeft();
+    }
+    public void moveRight(){
+        this.carModel.moveRight();
+    }
+    
+
+    
+    
 
     public static void main(String[] args) {
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
-        carController.start();
+        Obstacles obstacles = new Obstacles(view);
+        obstacles.start();
     }
 }
