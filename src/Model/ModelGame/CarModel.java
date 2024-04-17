@@ -27,5 +27,5 @@ public class CarModel {
             carLabel.setLocation(x += 80, y);
         }
     }
-   // private void check
+  
 }
