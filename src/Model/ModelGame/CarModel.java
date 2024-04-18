@@ -2,10 +2,7 @@ package Model.ModelGame;
 
 import javax.swing.JLabel;
 
-/**
- *
- * @author nguye
- */
+
 public class CarModel {
 
     private JLabel carLabel;

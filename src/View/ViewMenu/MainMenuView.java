@@ -1,9 +1,8 @@
 package View.ViewMenu;
 
-import Model.ModelGame.Obstacle;
-import Controller.ControllerMenu.HighScoreController;
-import Controller.ControllerMenu.InstructionsController;
-import Model.ModelGame.Obstacle;
+import Controller.ControllerGame.*;
+import Controller.ControllerMenu.*;
+import Model.ModelGame.*;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.*;
@@ -32,11 +31,11 @@ public class MainMenuView extends ImageFactory {
         JLabel titleLabel = new JLabel("Racing 2D");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(250, 30, 160, 30);
+        titleLabel.setBounds(260, 50, 150, 50);
         
-        startButton = createButton("Bắt đầu", "Image/Button_01.png", 262, 100, 116, 40);
-        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 262, 180, 116, 40);
-        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 262, 260, 116, 40);
+        startButton = createButton("Bắt đầu", "Image/Button_01.png", 245, 195, 150, 50);
+        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 245, 275, 150, 50);
+        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 245, 355, 150, 50);
 
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);
@@ -47,27 +46,32 @@ public class MainMenuView extends ImageFactory {
 
     public void showGame(){
         jFrame.dispose();
-        CarGameView gameView = new CarGameView();
-        //Obstacle carController = new Obstacle(gameView);
-       // carController.start();
-        gameView.setVisible(true);
+        CarGameView view = new CarGameView();
+        CarController carController = new CarController(view);
+        Obstacles obstacles = new Obstacles(view);
+        CarGameController carGameController = new CarGameController(view);
+        view.setVisible(true);
     }
-    //gọi giao diện điểm cao
-    public void showHighScoreView() {
-        jFrame.dispose();
-        HighScoreView highview = new HighScoreView();
-        //tạo controller điểm cao để xử lý các sự kiện trong giao diện điểm cao
-        HighScoreController highScoreController = new HighScoreController(highview);
-        highview.setVisible(true);
-    }
-    //gọi giao diện hướng dẫn
+    
     public void showInstrctionsView() {
         jFrame.dispose();
         InstructionsView instructionsView = new InstructionsView();
-        InstructionsController instructionsController = new InstructionsController(instructionsView);
+        new InstructionsController(instructionsView);
         instructionsView.setVisible(true);
     }
-
+    
+    public void showHighScoreView() {
+        jFrame.dispose();
+        HighScoreView highview = new HighScoreView();
+        new HighScoreController(highview);
+        highview.setVisible(true);
+    }
+    
+    public void showMainMenu() {
+        new MainMenuController(this);
+        jFrame.setVisible(true);
+    }
+    
     public JButton getHighScoreButton() {
         return highScoreButton;
     }
@@ -82,10 +86,6 @@ public class MainMenuView extends ImageFactory {
 
     public void setInstructionsButton(JButton instructionsButton) {
         this.instructionsButton = instructionsButton;
-    }
-    //gọi giao diện menu
-    public void showMainMenu() {
-        jFrame.setVisible(true);
     }
 
     public JPanel getMainMenuPanel() {

@@ -7,7 +7,7 @@ import javax.swing.*;
 public class Obstacle extends Thread {
 
     private JLabel label;
-    private int y, speed;
+    private int y, speed, startX, startY;
     private boolean running = true;
     Random rd = new Random();
 
@@ -35,8 +35,10 @@ public class Obstacle extends Thread {
                     e.printStackTrace();
                 }
             }
-
-            label.setLocation(x, y);
+//            startX = x;
+//            startY = newY;
+//        
+//            label.setLocation(startX, startY);
         }
     }
 
@@ -53,10 +55,9 @@ public class Obstacle extends Thread {
     }
     public void stopRunning(){
         running = false;
-        label.setLocation(label.getX(),label.getY());
     }
     public void countinueRunning(){
         this.running = true;
-        label.setLocation(label.getX(), label.getY());
+        label.setLocation(startX, startY);
     }
 }

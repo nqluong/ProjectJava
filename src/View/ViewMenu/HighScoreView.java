@@ -14,7 +14,6 @@ public class HighScoreView extends ImageFactory {
     
     public HighScoreView() {
         this.init();
-        jFrame.setVisible(true);
     }
     
     private void init(){
@@ -27,15 +26,22 @@ public class HighScoreView extends ImageFactory {
         
         highScorePanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
         
-        playerLabel = createImageLabel("Người chơi", "", 100, 100, 100, 30);
-        scoreLabel = createImageLabel("Điểm số", "", 400, 100, 100, 30);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 262, 260, 116, 40);
+        playerLabel = createImageLabel("Người chơi", "", 120, 150, 80, 30);
+        scoreLabel = createImageLabel("Điểm số", "", 445, 150, 70, 30);
+        homeButton = createButton("Trang chủ", "Image/Button_01.png", 245, 300, 150, 50);
         
         highScorePanel.add(playerLabel);
         highScorePanel.add(scoreLabel);
         highScorePanel.add(homeButton);
         
         jFrame.add(highScorePanel);
+    }
+    
+    public void showHighScoreView() {
+        jFrame.dispose();
+        HighScoreView highview = new HighScoreView();
+        HighScoreController highScoreController = new HighScoreController(highview);
+        highview.setVisible(true);
     }
 
     public JButton getHomeButton() {
@@ -45,12 +51,10 @@ public class HighScoreView extends ImageFactory {
     public void setHomeButton(JButton homeButton) {
         this.homeButton = homeButton;
     }
+    
     public void setVisible(boolean b) {
         jFrame.setVisible(true);
     } 
-    public static void main(String[] args) {
-        new HighScoreView();
-    }
 
     public void dispose() {
         jFrame.dispose();

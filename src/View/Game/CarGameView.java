@@ -1,22 +1,10 @@
 package View.Game;
 
-import Controller.ControllerGame.CarController;
-import Model.ModelGame.Obstacle;
-import Model.ModelGame.CarModel;
-import Model.ModelGame.Obstacles;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
+import Controller.ControllerGame.*;
+import Model.ModelGame.*;
+import java.awt.*;
+import javax.swing.*;
 import View.Game.*;
-import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Scanner;
 
@@ -29,6 +17,7 @@ public class CarGameView extends ImageFactory {
     private JLabel jLabelObstacle_Two, jLabelObstacle_Three, jLabel_IconCoin, jLabel_Car, jLabel_Coin, jLabel_Barrier_Car, jLabel_Barrier_Fence;
     private JTextField jTextField_Point, jTextField_Coin;
     private RoadLabel jLabel_Road;
+    private PauseGameView pauseGameView;
 
     public CarGameView() {
         this.init();
@@ -53,12 +42,11 @@ public class CarGameView extends ImageFactory {
         jLabel_Road.setSize(320, 700);
         jLabel_Road.setLayout(null);
         jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 50, 80);
-
         jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
 
-        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 183, 200, 50, 80);
-        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 247, 200, 50, 30);
-        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 183, 500, 50, 80);
+        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 183, -120, 50, 80);
+        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 247, -150, 50, 30);
+        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 183, -50, 50, 80);
         jLabelObstacle_Three = createImageLabel("", "Image/Barrier_Car_03.png", 85, -100, 50, 80);
 
         jPanel_Center.add(jLabel_Car);
@@ -89,8 +77,6 @@ public class CarGameView extends ImageFactory {
         jFrame.addKeyListener(kl);
     }
 
-    ;
-
     public JLabel getjLabel_Coin() {
         return jLabel_Coin;
     }
@@ -118,9 +104,26 @@ public class CarGameView extends ImageFactory {
     public int getCoinY() {
         return jLabel_Coin.getY();
     }
+    
+    public int getBarrier_CarY() {
+        return jLabel_Barrier_Car.getY();
+    }
+    
+    public int getObstacle_TwoY() {
+        return jLabelObstacle_Two.getY();
+    }
+    
+    public int getObstacle_ThreeY() {
+        return jLabelObstacle_Three.getY();
+    }
+    
+    public int getBarrier_FenceY() {
+        return jLabel_Barrier_Fence.getY();
+    }
+    
 
     public void setVisible(boolean b) {
-        jFrame.setVisible(true);
+        jFrame.setVisible(b);
     }
 
     public void moveLeft() {
@@ -131,12 +134,27 @@ public class CarGameView extends ImageFactory {
         this.carModel.moveRight();
     }
 
-    public static void main(String[] args) {
-        CarGameView view = new CarGameView();
-        CarController carController = new CarController(view);
-        Obstacles obstacles = new Obstacles(view);
-        Scanner sc = new Scanner(System.in);
-        if(sc.nextInt() == 1) obstacles.stopGame();
-      
+    public JButton getjButton_Pause() {
+        return jButton_Pause;
+    }
+
+    public void setjButton_Pause(JButton jButton_Pause) {
+        this.jButton_Pause = jButton_Pause;
+    }
+
+//    public static void main(String[] args) {
+//        CarGameView view = new CarGameView();
+//        CarController carController = new CarController(view);
+//        Obstacles obstacles = new Obstacles(view, pauseGameView);
+//        Scanner sc = new Scanner(System.in);
+//        if(sc.nextInt() == 1) obstacles.stopGame();
+//      
+//    }
+    
+    public void showPauseGameView(){
+        jFrame.setVisible(false);
+        PauseGameView pauseGameView = new PauseGameView();
+        new PauseGameController(pauseGameView);
+        pauseGameView.setVisible();
     }
 }

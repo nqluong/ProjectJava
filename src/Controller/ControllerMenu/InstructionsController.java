@@ -6,7 +6,6 @@ import java.awt.event.*;
 public class InstructionsController {
 
     private InstructionsView instructionsView;
-
     public InstructionsController(InstructionsView instructionsView) {
         this.instructionsView = instructionsView;
         instructionsView.getHomeButton().addActionListener(new HomeButtonlistener());
