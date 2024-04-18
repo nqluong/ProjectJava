@@ -18,12 +18,16 @@ public class Obstacles {
     private int roadSpeed = 2;
     Random random = new Random();
 
-    public Obstacles(CarGameView view) {
+    public Obstacles(CarGameView view, CarModel car) {
         this.view = view;
         obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed,0));
         obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed,100));
         obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed,200));
         obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed,300));
+        for (Obstacle obstacle : obstacles) {
+            obstacle.setCar(car);
+            obstacle.setObstacles(this);
+        }
         startGame();
     }
     public void startGame(){
@@ -33,12 +37,15 @@ public class Obstacles {
     }
     public void stopGame(){
         for (Obstacle obstacle : obstacles) {
+            int x = obstacle.getLabel().getX();
+            int y = obstacle.getLabel().getY();
             obstacle.stopRunning();
+            obstacle.getLabel().setLocation(x, y);
         }
     }
-    public void continueGame(){
-        for (Obstacle obstacle : obstacles) {
-            obstacle.countinueRunning();
-        }
-    }
+//    public void continueGame(){
+//        for (Obstacle obstacle : obstacles) {
+//            obstacle.countinueRunning();
+//        }
+//    }
 }

@@ -5,12 +5,12 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Obstacle extends Thread {
-
+    private Obstacles obstacles;
     private JLabel label;
     private int y, speed;
     private boolean running = true;
     Random rd = new Random();
-
+    private CarModel car ;
     public Obstacle(JLabel label, int speed, int y) {
         this.label = label;
         this.speed = speed;
@@ -29,6 +29,10 @@ public class Obstacle extends Thread {
             while (label.getY() < 700 && running) {
                 newY += speed;
                 label.setLocation(x, newY);
+                if(judgeStop()){
+                    obstacles.stopGame();
+                    return;
+                }
                 try {
                     sleep(20);
                 } catch (InterruptedException e) {
@@ -53,10 +57,26 @@ public class Obstacle extends Thread {
     }
     public void stopRunning(){
         running = false;
-        label.setLocation(label.getX(),label.getY());
+
     }
-    public void countinueRunning(){
-        this.running = true;
-        label.setLocation(label.getX(), label.getY());
+    
+    public void setCar(CarModel car){
+        this.car = car;
     }
+    public boolean judgeStop(){
+        boolean flag = false;
+        int carRight = car.getX() + car.getCarLabel().getWidth();
+        int carBottom = car.getY() + car.getCarLabel().getHeight();
+        int obstacleRight = label.getX() + label.getWidth();
+        int obstacleBottom = label.getY() + label.getHeight();
+        if(car.getX() < obstacleRight && carRight > label.getX() && car.getY() < obstacleBottom && carBottom > label.getY()){
+            flag = true;
+        }
+        return flag;
+    }
+
+    public void setObstacles(Obstacles obstacles) {
+        this.obstacles = obstacles;
+    }
+    
 }

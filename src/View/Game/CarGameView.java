@@ -33,6 +33,7 @@ public class CarGameView extends ImageFactory {
     public CarGameView() {
         this.init();
         carModel = new CarModel(jLabel_Car);
+         Obstacles obstacles = new Obstacles(this, carModel);
         jFrame.setVisible(true);
 //        Obstacle carController = new Obstacle(jLabel_Road);
 //        carController.startAnimation();
@@ -52,14 +53,14 @@ public class CarGameView extends ImageFactory {
         jLabel_Road = new RoadLabel("Image/Road.png");
         jLabel_Road.setSize(320, 700);
         jLabel_Road.setLayout(null);
-        jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 50, 80);
+        jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 60, 80);
 
         jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
-
-        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 183, 200, 50, 80);
-        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 247, 200, 50, 30);
-        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 183, 500, 50, 80);
-        jLabelObstacle_Three = createImageLabel("", "Image/Barrier_Car_03.png", 85, -100, 50, 80);
+           //vật cản
+        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 10, 200, 60, 80);
+        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 10, 200, 60, 30);
+        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 10, 500, 60, 80);
+        jLabelObstacle_Three = createImageLabel("", "Image/Barrier_Car_03.png", 10, -100, 60, 80);
 
         jPanel_Center.add(jLabel_Car);
         jPanel_Center.add(jLabel_Coin);
@@ -134,9 +135,10 @@ public class CarGameView extends ImageFactory {
     public static void main(String[] args) {
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
-        Obstacles obstacles = new Obstacles(view);
-        Scanner sc = new Scanner(System.in);
-        if(sc.nextInt() == 1) obstacles.stopGame();
-      
+        
+       
+//        Scanner sc = new Scanner(System.in);
+//        if(sc.nextInt() == 1) obstacles.stopGame();
+//      
     }
 }
