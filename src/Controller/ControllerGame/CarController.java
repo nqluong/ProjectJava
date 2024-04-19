@@ -1,6 +1,9 @@
 package Controller.ControllerGame;
 
 import View.Game.CarGameView;
+import View.Game.PauseGameView;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
@@ -12,6 +15,7 @@ public class CarController implements KeyListener {
     private CarGameView view;
     public CarController(CarGameView view) {
         this.view = view;
+        view.getjButton_Pause().addActionListener(new PauseButtonListener());
     }
 
     @Override
@@ -36,4 +40,15 @@ public class CarController implements KeyListener {
        // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    private class PauseButtonListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+            view.dispose();
+            PauseGameView pauseView = new PauseGameView();
+            new PauseGameController(pauseView);
+        }
+        
+    }
 }

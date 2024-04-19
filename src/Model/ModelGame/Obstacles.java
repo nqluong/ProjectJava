@@ -20,34 +20,42 @@ public class Obstacles {
 
     public Obstacles(CarGameView view, CarModel car) {
         this.view = view;
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed,0));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed,100));
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed,200));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed,300));
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed, view.getjLabel_Barrier_Car().getX(),0));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed,view.getjLabelObstacle_Three().getX(), -100));
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed,view.getjLabel_Barrier_Fence().getX(), -200));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed, view.getjLabelObstacle_Two().getX(),-300));
         for (Obstacle obstacle : obstacles) {
             obstacle.setCar(car);
             obstacle.setObstacles(this);
         }
         startGame();
     }
-    public void startGame(){
+
+    public void startGame() {
         for (Obstacle obstacle : obstacles) {
             obstacle.start();
         }
     }
-    public void stopGame(){
+
+    public void stopGame() {
         for (Obstacle obstacle : obstacles) {
             int x = obstacle.getLabel().getX();
             int y = obstacle.getLabel().getY();
-            obstacle.stopRunning();
-            obstacle.getLabel().setLocation(x, y);
+            //obstacle.stopRunning();
+//            obstacle.getLabel().setLocation(x, y);
         }
         view.showGameOver();
-        
+
     }
-//    public void continueGame(){
-//        for (Obstacle obstacle : obstacles) {
-//            obstacle.countinueRunning();
-//        }
-//    }
+    
+    public void pauseGame(){
+        for (Obstacle obstacle : obstacles) {
+            obstacle.pause();
+        }
+    }
+    public void resumeGame(){
+        for (Obstacle obstacle : obstacles) {
+            obstacle.resumed();
+        }
+    }
 }
