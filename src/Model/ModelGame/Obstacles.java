@@ -16,6 +16,7 @@ public class Obstacles {
     private ArrayList<Obstacle> obstacles = new ArrayList<>();
     private CarGameView view;
     private int roadSpeed = 2;
+    private volatile int score=0;
     Random random = new Random();
 
     public Obstacles(CarGameView view, CarModel car) {
@@ -42,6 +43,10 @@ public class Obstacles {
             obstacle.stopRunning();
             obstacle.getLabel().setLocation(x, y);
         }
+    }
+    public void increasescore() {
+        score += 100; 
+        view.getjTextField_Point().setText(Integer.toString(score));
     }
 //    public void continueGame(){
 //        for (Obstacle obstacle : obstacles) {

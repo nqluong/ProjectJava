@@ -1,9 +1,9 @@
 package View.ViewMenu;
 
-import Model.ModelGame.Obstacle;
+//import Model.ModelGame.Obstacle;
 import Controller.ControllerMenu.HighScoreController;
 import Controller.ControllerMenu.InstructionsController;
-import Model.ModelGame.Obstacle;
+//import Model.ModelGame.Obstacle;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.*;

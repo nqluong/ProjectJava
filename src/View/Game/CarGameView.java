@@ -3,11 +3,12 @@ package View.Game;
 import Controller.ControllerGame.CarController;
 import Model.ModelGame.Obstacle;
 import Model.ModelGame.CarModel;
+import Model.ModelGame.CoinModel;
 import Model.ModelGame.Obstacles;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-
+import Model.ModelGame.CoinModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -23,17 +24,22 @@ import java.util.Scanner;
 public class CarGameView extends ImageFactory {
 
     private CarModel carModel;
+    private CoinModel coinModel;
     private JFrame jFrame;
     private JPanel jPanel_Center, jPanel_Left, jPanel_Right;
     private JButton jButton_Pause;
     private JLabel jLabelObstacle_Two, jLabelObstacle_Three, jLabel_IconCoin, jLabel_Car, jLabel_Coin, jLabel_Barrier_Car, jLabel_Barrier_Fence;
     private JTextField jTextField_Point, jTextField_Coin;
     private RoadLabel jLabel_Road;
-
+ 
     public CarGameView() {
         this.init();
         carModel = new CarModel(jLabel_Car);
+        
          Obstacles obstacles = new Obstacles(this, carModel);
+         coinModel=new CoinModel(this,carModel);
+        coinModel.start();
+        
         jFrame.setVisible(true);
 //        Obstacle carController = new Obstacle(jLabel_Road);
 //        carController.startAnimation();
@@ -75,13 +81,15 @@ public class CarGameView extends ImageFactory {
         jPanel_Left.add(jButton_Pause);
 
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
-        jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
-        jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
+        jTextField_Point = new JTextField("0");
+        jTextField_Point.setBounds(80, 0, 80, 30);
+        jTextField_Coin = new JTextField("0");
+        jTextField_Coin.setBounds(100, 40, 60, 30);
         jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 17, 17);
         jPanel_Right.add(jTextField_Point);
         jPanel_Right.add(jLabel_IconCoin);
         jPanel_Right.add(jTextField_Coin);
-
+        
         jFrame.add(jPanel_Center);
         jFrame.add(jPanel_Left);
         jFrame.add(jPanel_Right);
@@ -92,6 +100,12 @@ public class CarGameView extends ImageFactory {
 
     ;
 
+    public JTextField getjTextField_Coin() {
+        return jTextField_Coin;
+    }
+    public JTextField getjTextField_Point() {
+        return jTextField_Point;
+    }
     public JLabel getjLabel_Coin() {
         return jLabel_Coin;
     }
@@ -111,7 +125,9 @@ public class CarGameView extends ImageFactory {
     public JLabel getjLabel_Barrier_Fence() {
         return jLabel_Barrier_Fence;
     }
-
+//    public JLabel getjLabel_Coin() {
+//        return jLabel_Coin;
+//    }
     public int getCarY() {
         return jLabel_Car.getY();
     }

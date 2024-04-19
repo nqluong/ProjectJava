@@ -11,6 +11,8 @@ public class Obstacle extends Thread {
     private boolean running = true;
     Random rd = new Random();
     private CarModel car ;
+    private int score=0;
+    private boolean crossed = false; 
     public Obstacle(JLabel label, int speed, int y) {
         this.label = label;
         this.speed = speed;
@@ -33,6 +35,10 @@ public class Obstacle extends Thread {
                     obstacles.stopGame();
                     return;
                 }
+                if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
+                crossed = true;
+                obstacles.increasescore();
+            }
                 try {
                     sleep(20);
                 } catch (InterruptedException e) {
@@ -74,7 +80,13 @@ public class Obstacle extends Thread {
         }
         return flag;
     }
-
+    public boolean collision() {
+         boolean flag = false;
+        if(car.getCarLabel().getHeight() <= label.getHeight()){
+            flag = true;
+        }
+        return flag;
+    }
     public void setObstacles(Obstacles obstacles) {
         this.obstacles = obstacles;
     }
