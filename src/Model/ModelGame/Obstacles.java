@@ -42,6 +42,8 @@ public class Obstacles {
             obstacle.stopRunning();
             obstacle.getLabel().setLocation(x, y);
         }
+        view.showGameOver();
+        
     }
 //    public void continueGame(){
 //        for (Obstacle obstacle : obstacles) {

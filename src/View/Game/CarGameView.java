@@ -75,7 +75,8 @@ public class CarGameView extends ImageFactory {
         jPanel_Left.add(jButton_Pause);
 
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
-        jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
+        jTextField_Point = new JTextField();
+        
         jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
         jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 17, 17);
         jPanel_Right.add(jTextField_Point);
@@ -131,11 +132,21 @@ public class CarGameView extends ImageFactory {
     public void moveRight() {
         this.carModel.moveRight();
     }
-
+    public void showGameOver(){
+        jFrame.dispose();
+        GameOverView gameOver = new GameOverView();
+        
+    }
+    public void setTxt(){
+        this.jLabel_Coin.setText("10");
+    }
+    public void showGame(){
+        jFrame.setVisible(true);
+    }
     public static void main(String[] args) {
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
-        
+        view.setTxt();
        
 //        Scanner sc = new Scanner(System.in);
 //        if(sc.nextInt() == 1) obstacles.stopGame();
