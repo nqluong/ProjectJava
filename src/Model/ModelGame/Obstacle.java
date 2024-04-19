@@ -45,7 +45,7 @@ public class Obstacle extends Thread {
                     e.printStackTrace();
                 }
             }
-
+            crossed = false; 
             label.setLocation(x, y);
         }
     }

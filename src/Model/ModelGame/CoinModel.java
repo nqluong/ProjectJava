@@ -31,8 +31,8 @@ public class CoinModel extends Thread {
             if(!collisionChecked && collision()) {
                 this.tang();
                 collisionChecked = true; 
-                
-                  
+                y=500;
+                 
             }
             try {
                 
@@ -66,6 +66,7 @@ public class CoinModel extends Thread {
         int coinBottom = view.getjLabel_Coin().getY() + view.getjLabel_Coin().getHeight();
         if(car.getX() < coinRight && carRight > view.getjLabel_Coin().getX() && car.getY() < coinBottom && carBottom > view.getjLabel_Coin().getY()){
             flag = true;
+            
             
         }
         return flag;
