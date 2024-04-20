@@ -10,12 +10,15 @@ import java.awt.Font;
 import javax.swing.*;
 public class SavePointView extends ImageFactory{
     private JFrame jFrame;
+    private CarGameView view;
     private JPanel jPanel_SavePointView;
     private JLabel jLabelSave, jLabelPoint;
     private JButton jButtonSave;
     private JTextField jText;
-    public SavePointView(){
+    public SavePointView(CarGameView view){
+        this.view = view;
         this.init();
+        
     }
     private void init(){
         jFrame = new JFrame();
@@ -39,7 +42,7 @@ public class SavePointView extends ImageFactory{
         jText.setBounds(280, 180, 200, 40);
         jButtonSave = createButton("Lưu", "Image/Button_01.png", 260, 240, 120, 40);
         //hiện số điểm đạt được
-        jLabelPoint = createImageLabel("Số điểm đạt được: "+10, "Image/Button_01.png", 200, 100, 240, 40);
+        jLabelPoint = createImageLabel("Số điểm đạt được: " + view.getjTextField_Point().getText(), "Image/Button_01.png", 200, 100, 240, 40);
         
         
         jPanel_SavePointView.add(jLabelPoint);

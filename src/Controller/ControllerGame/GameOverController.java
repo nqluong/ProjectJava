@@ -40,6 +40,8 @@ public class GameOverController {
             //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             CarGameView gameView = new CarGameView();
             CarController  carController = new CarController(gameView);
+            gameView.startGame();
+            //gameView.setVisible(true);
         }
         
     }
@@ -49,8 +51,7 @@ public class GameOverController {
         public void actionPerformed(ActionEvent e) {
             //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             overView.dispose();
-            SavePointView saveView = new SavePointView();
-            new SavePointController(saveView);
+            overView.showSave();
         }
         
     }

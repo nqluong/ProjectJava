@@ -1,19 +1,26 @@
 package View.Game;
 
 import Controller.ControllerGame.GameOverController;
+import Controller.ControllerGame.SavePointController;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.ImageFactory;
 import java.awt.event.ActionListener;
 
 public class GameOverView extends ImageFactory {
-
+    private CarGameView view;
     private JFrame jFrame;
     private JPanel jPanel_GameOverView;
     private JButton jButton_PlayAgain, jButton_Home, jButton_SavePoint;
 
     public GameOverView() {
         this.init();
+    }
+    
+    public GameOverView(CarGameView view) {
+        this.view = view;
+        this.init();
+        
     }
 
     private void init() {
@@ -57,10 +64,9 @@ public class GameOverView extends ImageFactory {
     public void setVisible(boolean b) {
         jFrame.setVisible(true);
     }
-
-    public static void main(String[] args) {
-        GameOverView view = new GameOverView();
-        new GameOverController(view);
+    public void showSave(){
+        SavePointView viewSave = new SavePointView(view);
+        new SavePointController(viewSave);
     }
 
     public void dispose() {

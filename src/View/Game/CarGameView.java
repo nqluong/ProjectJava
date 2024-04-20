@@ -4,11 +4,12 @@ import Controller.ControllerGame.CarController;
 import Controller.ControllerGame.GameOverController;
 import Model.ModelGame.Obstacle;
 import Model.ModelGame.CarModel;
+import Model.ModelGame.CoinModel;
 import Model.ModelGame.Obstacles;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
-
+import Model.ModelGame.CoinModel;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -22,8 +23,10 @@ import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 public class CarGameView extends ImageFactory {
+
     private Obstacles obstacles;
     private CarModel carModel;
+    private CoinModel coinModel;
     private JFrame jFrame;
     private JPanel jPanel_Center, jPanel_Left, jPanel_Right;
     private JButton jButton_Pause;
@@ -32,10 +35,11 @@ public class CarGameView extends ImageFactory {
     private RoadLabel jLabel_Road;
 
     public CarGameView() {
+        carModel = new CarModel(jLabel_Car);
+        obstacles = new Obstacles(this, carModel);
+        coinModel = new CoinModel(this, carModel);
+        jFrame.setVisible(true);
         this.init();
-     //   jFrame.setVisible(true);
-//        Obstacle carController = new Obstacle(jLabel_Road);
-//        carController.startAnimation();
     }
 
     public void init() {
@@ -55,7 +59,7 @@ public class CarGameView extends ImageFactory {
         jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 60, 80);
 
         jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
-           //vật cản
+        //vật cản
         jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 10, -200, 60, 80);
         jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 10, -200, 60, 30);
         jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 10, -500, 60, 80);
@@ -74,8 +78,7 @@ public class CarGameView extends ImageFactory {
         jPanel_Left.add(jButton_Pause);
 
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
-        jTextField_Point = new JTextField();
-        
+        jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
         jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
         jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 17, 17);
         jPanel_Right.add(jTextField_Point);
@@ -90,10 +93,17 @@ public class CarGameView extends ImageFactory {
         jFrame.addKeyListener(kl);
     }
 
-    public void startGame(){
+    public void startGame() {
         jFrame.setVisible(true);
-        carModel = new CarModel(jLabel_Car);
-        obstacles = new Obstacles(this, carModel);
+        coinModel.start();
+    }
+
+    public JTextField getjTextField_Coin() {
+        return jTextField_Coin;
+    }
+
+    public JTextField getjTextField_Point() {
+        return jTextField_Point;
     }
 
     public JLabel getjLabel_Coin() {
@@ -115,6 +125,9 @@ public class CarGameView extends ImageFactory {
     public JLabel getjLabel_Barrier_Fence() {
         return jLabel_Barrier_Fence;
     }
+//    public JLabel getjLabel_Coin() {
+//        return jLabel_Coin;
+//    }
 
     public int getCarY() {
         return jLabel_Car.getY();
@@ -139,30 +152,29 @@ public class CarGameView extends ImageFactory {
     public void moveRight() {
         this.carModel.moveRight();
     }
-    public void showGameOver(){
+
+    public void showGameOver() {
         jFrame.dispose();
-        GameOverView gameOver = new GameOverView();
+        GameOverView gameOver = new GameOverView(this);
         new GameOverController(gameOver);
     }
-    public void dispose(){
+
+    public void dispose() {
         jFrame.dispose();
     }
-    public void showGame(){
+
+    public void showGame() {
         jFrame.setVisible(true);
     }
-    public void pauseGame(){
+
+    public void pauseGame() {
         obstacles.pauseGame();
     }
-    public void resumeGame(){
-        obstacles.resumeGame();
-    }
-    public static void main(String[] args) {
-        CarGameView view = new CarGameView();
-        CarController carController = new CarController(view);
-        view.startGame();
-       
-        Scanner sc = new Scanner(System.in);
-        if(sc.nextInt() == 1) view.pauseGame();
-       if(sc.nextInt() == 2) view.resumeGame();
-    }
+
+//    public static void main(String[] args) {
+//        CarGameView view = new CarGameView();
+//        CarController carController = new CarController(view);
+//        view.startGame();
+//
+//    }
 }
