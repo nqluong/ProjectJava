@@ -81,10 +81,8 @@ public class CarGameView extends ImageFactory {
         jPanel_Left.add(jButton_Pause);
 
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
-        jTextField_Point = new JTextField("0");
-        jTextField_Point.setBounds(80, 0, 80, 30);
-        jTextField_Coin = new JTextField("0");
-        jTextField_Coin.setBounds(100, 40, 60, 30);
+         jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
+        jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
         jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 17, 17);
         jPanel_Right.add(jTextField_Point);
         jPanel_Right.add(jLabel_IconCoin);
