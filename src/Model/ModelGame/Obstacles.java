@@ -17,14 +17,13 @@ public class Obstacles {
     private CarGameView view;
     private int roadSpeed = 2;
     private volatile int score=0;
-    Random random = new Random();
 
     public Obstacles(CarGameView view, CarModel car) {
         this.view = view;
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed, view.getjLabel_Barrier_Car().getX(),0));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed,view.getjLabelObstacle_Three().getX(), -100));
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed,view.getjLabel_Barrier_Fence().getX(), -200));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed, view.getjLabelObstacle_Two().getX(),-300));
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed));
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed ));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed));
         for (Obstacle obstacle : obstacles) {
             obstacle.setCar(car);
             obstacle.setObstacles(this);
@@ -40,12 +39,11 @@ public class Obstacles {
 
     public void stopGame() {
         for (Obstacle obstacle : obstacles) {
-            int x = obstacle.getLabel().getX();
-            int y = obstacle.getLabel().getY();
-            //obstacle.stopRunning();
-//            obstacle.getLabel().setLocation(x, y);
+
+           // obstacle.interrupt();
+          obstacle.stopRunning();
         }
-        view.showGameOver();
+        //view.showGameOver();
 
     }
     
@@ -54,6 +52,10 @@ public class Obstacles {
             obstacle.pause();
         }
     }
+    public void continueGame(){
+        for (Obstacle obstacle : obstacles) {
+            obstacle.continueGame();
+        }}
     public void increasescore() {
         score += 100; 
         view.getjTextField_Point().setText(Integer.toString(score));
@@ -63,4 +65,12 @@ public class Obstacles {
 //            obstacle.countinueRunning();
 //        }
 //    }
+
+    public void setRoadSpeed(int roadSpeed) {
+        this.roadSpeed = roadSpeed;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
+    }
 }

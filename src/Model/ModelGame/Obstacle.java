@@ -5,46 +5,42 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Obstacle extends Thread {
-
+    private boolean allRandom = true;
     private Obstacles obstacles;
     private JLabel label;
     private int x, y, speed;
     private int pauseX, pauseY;
     private boolean running = true;
     private boolean paused = false;
+    
     Random rd = new Random();
     private CarModel car ;
     private int score=0;
     private boolean crossed = false; 
-    public Obstacle(JLabel label, int speed, int x,int y) {
+    public Obstacle(JLabel label, int speed) {
         this.label = label;
         this.speed = speed;
-        this.x = x;
-        this.y = y;
+        y = label.getY();
     }
 
     public void run() {
-        //int preIndex = -1;
-        while (running) {
-            int index;
-            index = rd.nextInt(4);
-
-            int newY;
-
-            int x = index * 80 + 10;
-
-            while (paused) {
-                try {
-                    synchronized (this) {
-                        wait();
-                    }
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
+        while (running ) {
+            if(paused){
+                try{
+                    sleep(10);
+                    continue;
+                }catch(InterruptedException e){
+                    e.printStackTrace();
                 }
             }
-            label.setLocation(x, y);
+            
+            if(allRandom){
+                int index = rd.nextInt(4);
+                x = index * 80 + 10;
+            }else x = pauseX;
+            
             while (label.getY() < 700 && !paused) {
-                newY = label.getY() + speed;
+                int newY = label.getY()+ speed;
                 label.setLocation(x, newY);
                 if (judgeStop()) {
                     obstacles.stopGame();
@@ -61,8 +57,9 @@ public class Obstacle extends Thread {
                 }
             }
               crossed = false; 
-            label.setLocation(x, y);
+         if(!paused)label.setLocation(x, y);
         }
+        
     }
 
     public JLabel getLabel() {
@@ -76,20 +73,23 @@ public class Obstacle extends Thread {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-
+    public void stopRunning(){
+        running = false;
+    }
     public void pause() {
         paused = true;
-    }
-    public void resumed(){
-        paused = false;
-        synchronized (this) {
-            notify();
-        }
+        pauseX = label.getX();
+        pauseY = label.getY();
     }
     public void setCar(CarModel car) {
         this.car = car;
     }
-
+    public void continueGame(){
+        paused = false;
+        allRandom = false;
+        label.setLocation(pauseX, pauseY);
+        
+    }
     public boolean judgeStop() {
         boolean flag = false;
         int carRight = car.getX() + car.getCarLabel().getWidth();

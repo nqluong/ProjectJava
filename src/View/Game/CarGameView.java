@@ -35,11 +35,13 @@ public class CarGameView extends ImageFactory {
     private RoadLabel jLabel_Road;
 
     public CarGameView() {
+        
+
+        this.init();
         carModel = new CarModel(jLabel_Car);
         obstacles = new Obstacles(this, carModel);
         coinModel = new CoinModel(this, carModel);
         jFrame.setVisible(true);
-        this.init();
     }
 
     public void init() {
@@ -58,12 +60,12 @@ public class CarGameView extends ImageFactory {
         jLabel_Road.setLayout(null);
         jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 60, 80);
 
-        jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
+        jLabel_Coin = createImageLabel("", "Image/Coin.png", 25, -50, 35, 35);
         //vật cản
-        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 10, -200, 60, 80);
-        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 10, -200, 60, 30);
-        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 10, -500, 60, 80);
-        jLabelObstacle_Three = createImageLabel("", "Image/Barrier_Car_03.png", 10, -100, 60, 80);
+        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 10, -150, 60, 80);
+        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 10, -300, 60, 30);
+        jLabelObstacle_Two = createImageLabel("", "Image/Barrier_Car_02.png", 10, -350, 60, 80);
+        jLabelObstacle_Three = createImageLabel("", "Image/Barrier_Car_03.png", 10, -500, 60, 80);
 
         jPanel_Center.add(jLabel_Car);
         jPanel_Center.add(jLabel_Coin);
@@ -80,7 +82,7 @@ public class CarGameView extends ImageFactory {
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
         jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
         jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
-        jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 17, 17);
+        jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 30, 30);
         jPanel_Right.add(jTextField_Point);
         jPanel_Right.add(jLabel_IconCoin);
         jPanel_Right.add(jTextField_Coin);
@@ -168,13 +170,19 @@ public class CarGameView extends ImageFactory {
     }
 
     public void pauseGame() {
+        coinModel.pauseGame();
         obstacles.pauseGame();
     }
-
-//    public static void main(String[] args) {
-//        CarGameView view = new CarGameView();
-//        CarController carController = new CarController(view);
-//        view.startGame();
-//
-//    }
+    public void continueGame(){
+        coinModel.continueGame();
+        obstacles.continueGame();
+    }
+    public static void main(String[] args) {
+        CarGameView view = new CarGameView();
+        CarController carController = new CarController(view);
+        view.startGame();
+        Scanner sc = new Scanner(System.in);
+        if(sc.nextInt() == 1) view.pauseGame();
+        if(sc.nextInt() == 2) view.continueGame();
+    }
 }

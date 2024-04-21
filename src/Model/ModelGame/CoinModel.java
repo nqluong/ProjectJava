@@ -6,27 +6,49 @@ import java.util.Random;
 import javax.swing.JLabel;
 
 public class CoinModel extends Thread {
-   
+    private boolean paused = false, allRandom = true;
     private CarGameView view;
     private int roadspeed=2;
-    private int y=500;
+    private int pauseX, pauseY, y;
+
+    public void setRoadspeed(int roadspeed) {
+        this.roadspeed = roadspeed;
+    }
+
+    public void setCoin(int coin) {
+        this.coin = coin;
+    }
     private CarModel car;
-    private int coin=0;
+    private int coin = 0 ;
     Random rd = new Random();
     public CoinModel(CarGameView view,CarModel car) {
         this.view=view;
         this.car=car;
+        y = view.getjLabel_Coin().getY();
     }
  
 
    public void run() {
     while (true) {
-        int index = rd.nextInt(4);
-        int newY = -y;
-        int x = index * 80 + 10;
+        
+        if(paused){
+                try{
+                    sleep(20);
+                    continue;
+                }catch(InterruptedException e){
+                    e.printStackTrace();
+                }
+            }
+        int newY, x;
+        if(allRandom){
+            int index = rd.nextInt(4);
+            x = index * 80 + 10;
+        } else x = pauseX;
         boolean collisionChecked = false;
-        while (view.getCoinY() < 700) {
-            newY += roadspeed;
+        
+        
+        while (view.getCoinY() < 700 && !paused) {
+            newY = view.getCoinY() + roadspeed;
             view.getjLabel_Coin().setLocation(x, newY);
             if(!collisionChecked && collision()) {
                 this.tang();
@@ -41,7 +63,7 @@ public class CoinModel extends Thread {
             }
         }
         
-        view.getjLabel_Coin().setLocation(x, y);
+        if(!paused)view.getjLabel_Coin().setLocation(x, y);
     }
 }
 
@@ -78,7 +100,18 @@ public class CoinModel extends Thread {
         view.getjTextField_Coin().setText(Integer.toString(coin));
        
     }
-    
 
-
+    public void setPaused(boolean paused) {
+        this.paused = paused;
+    }
+    public void pauseGame(){
+        paused = true;
+        pauseX = view.getjLabel_Coin().getX();
+        pauseY = view.getjLabel_Coin().getY();
+    }
+    public void continueGame(){
+        paused = false;
+        allRandom = false;
+        view.getjLabel_Coin().setLocation(pauseX, pauseY);
+    }
 }
