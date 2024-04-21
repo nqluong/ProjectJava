@@ -35,11 +35,11 @@ public class CarGameView extends ImageFactory {
     private RoadLabel jLabel_Road;
 
     public CarGameView() {
+        this.init();
         carModel = new CarModel(jLabel_Car);
         obstacles = new Obstacles(this, carModel);
         coinModel = new CoinModel(this, carModel);
         jFrame.setVisible(true);
-        this.init();
     }
 
     public void init() {
