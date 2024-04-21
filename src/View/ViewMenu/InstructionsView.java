@@ -1,9 +1,9 @@
 
-package View.ViewMenu;
+package ProjectJava.src.View.ViewMenu;
 
 import javax.swing.*;
 import java.awt.*;
-import View.Game.*;
+import ProjectJava.src.View.Game.*;
 
 public class InstructionsView extends ImageFactory {
     private JFrame jFrame;
@@ -24,11 +24,11 @@ public class InstructionsView extends ImageFactory {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
         
-        instructionsPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
+        instructionsPanel = createImagePanel("ProjectJava/Image/NenCar_01.png", 0, 0, 640, 700);
         
         instruction1Label = createImageLabel("Dùng phím mũi tên để di chuyển", "", 220, 120, 260, 20);
         instruction2Label = createImageLabel("Tránh chướng ngại vật", "", 260, 160, 180, 20);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 262, 260, 116, 40);
+        homeButton = createButton("Trang chủ", "ProjectJava/Image/Button_01.png", 262, 260, 116, 40);
         
         instructionsPanel.add(instruction1Label);
         instructionsPanel.add(instruction2Label);

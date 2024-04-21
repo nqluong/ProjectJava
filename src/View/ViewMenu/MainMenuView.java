@@ -1,12 +1,12 @@
-package View.ViewMenu;
+package ProjectJava.src.View.ViewMenu;
 
-import Controller.ControllerGame.CarController;
-import Controller.ControllerMenu.HighScoreController;
-import Controller.ControllerMenu.InstructionsController;
-import Controller.ControllerGame.CarController;
+import ProjectJava.src.Controller.ControllerGame.CarController;
+import ProjectJava.src.Controller.ControllerMenu.HighScoreController;
+import ProjectJava.src.Controller.ControllerMenu.InstructionsController;
+import ProjectJava.src.Controller.ControllerGame.CarController;
 import javax.swing.*;
 import java.awt.*;
-import View.Game.*;
+import ProjectJava.src.View.Game.*;
 
 public class MainMenuView extends ImageFactory {
 
@@ -27,16 +27,16 @@ public class MainMenuView extends ImageFactory {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
         
-        mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
+        mainMenuPanel = createImagePanel("ProjectJava/Image/NenCar_01.png", 0, 0, 640, 700);
 
         JLabel titleLabel = new JLabel("Racing 2D");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(250, 30, 160, 30);
         
-        startButton = createButton("Bắt đầu", "Image/Button_01.png", 262, 100, 116, 40);
-        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 262, 180, 116, 40);
-        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 262, 260, 116, 40);
+        startButton = createButton("Bắt đầu", "ProjectJava/Image/Button_01.png", 262, 100, 116, 40);
+        highScoreButton = createButton("Điểm cao", "ProjectJava/Image/Button_01.png", 262, 180, 116, 40);
+        instructionsButton = createButton("Hướng dẫn", "ProjectJava/Image/Button_01.png", 262, 260, 116, 40);
 
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);

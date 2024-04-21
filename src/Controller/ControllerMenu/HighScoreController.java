@@ -1,6 +1,6 @@
-package Controller.ControllerMenu;
+package ProjectJava.src.Controller.ControllerMenu;
 
-import View.ViewMenu.*;
+import ProjectJava.src.View.ViewMenu.*;
 import java.awt.event.*;
 public class HighScoreController {
     private HighScoreView highView;

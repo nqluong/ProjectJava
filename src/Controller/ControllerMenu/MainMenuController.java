@@ -1,7 +1,7 @@
 
-package Controller.ControllerMenu;
+package ProjectJava.src.Controller.ControllerMenu;
 
-import View.ViewMenu.MainMenuView;
+import ProjectJava.src.View.ViewMenu.MainMenuView;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

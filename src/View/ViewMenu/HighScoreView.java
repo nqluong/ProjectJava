@@ -1,10 +1,10 @@
 
-package View.ViewMenu;
+package ProjectJava.src.View.ViewMenu;
 
-import Controller.ControllerMenu.HighScoreController;
+import ProjectJava.src.Controller.ControllerMenu.HighScoreController;
 import javax.swing.*;
 import java.awt.*;
-import View.Game.*;
+import ProjectJava.src.View.Game.*;
 
 public class HighScoreView extends ImageFactory {
     private JFrame jFrame;
@@ -25,11 +25,11 @@ public class HighScoreView extends ImageFactory {
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
         
-        highScorePanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
+        highScorePanel = createImagePanel("ProjectJava/Image/NenCar_01.png", 0, 0, 640, 700);
         
         playerLabel = createImageLabel("Người chơi", "", 100, 100, 100, 30);
         scoreLabel = createImageLabel("Điểm số", "", 400, 100, 100, 30);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 262, 260, 116, 40);
+        homeButton = createButton("Trang chủ", "ProjectJava/Image/Button_01.png", 262, 260, 116, 40);
         
         highScorePanel.add(playerLabel);
         highScorePanel.add(scoreLabel);

@@ -1,5 +1,5 @@
 
-package View.Game;
+package ProjectJava.src.View.Game;
 
 import javax.swing.*;
 import java.awt.*;

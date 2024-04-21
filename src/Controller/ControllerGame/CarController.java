@@ -1,6 +1,6 @@
-package Controller.ControllerGame;
+package ProjectJava.src.Controller.ControllerGame;
 
-import View.Game.CarGameView;
+import ProjectJava.src.View.Game.CarGameView;
 import java.util.Random;
 import javax.swing.*;
 

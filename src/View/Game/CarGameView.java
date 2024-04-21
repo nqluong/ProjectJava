@@ -1,6 +1,6 @@
-package View.Game;
+package ProjectJava.src.View.Game;
 
-import Controller.ControllerGame.CarController;
+import ProjectJava.src.Controller.ControllerGame.CarController;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -12,9 +12,9 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
-import View.Game.*;
+import ProjectJava.src.View.Game.*;
 
-public class CarGameView extends ImageFactory {
+public class CarGameView extends ProjectJava.src.View.Game.ImageFactory {
 
     private JFrame jFrame;
     private JPanel jPanel_Center, jPanel_Left, jPanel_Right;
@@ -42,13 +42,13 @@ public class CarGameView extends ImageFactory {
 //	Car, Barrier : 25; 88; 183; 247 Coin: 30; 94; 192; 255
         
         jPanel_Center = createImagePanel("", 160, 0, 320, 700);
-        jLabel_Road = new RoadLabel("Image/Road.png");
+        jLabel_Road = new RoadLabel("ProjectJava/Image/Road.png");
         jLabel_Road.setSize(320, 700);
         jLabel_Road.setLayout(null);
-        jLabel_Car = createImageLabel("", "Image/Car_01.png", 25, 530, 50, 80);
-        jLabel_Coin = createImageLabel("", "Image/Coin.png", 94, 50, 35, 35);
-        jLabel_Barrier_Car = createImageLabel("", "Image/Barrier_Car_01.png", 183, 200, 50, 80);
-        jLabel_Barrier_Fence = createImageLabel("", "Image/Barrier_Fence.png", 247, 200, 50, 30);
+        jLabel_Car = createImageLabel("", "ProjectJava/Image/Car_01.png", 25, 530, 50, 80);
+        jLabel_Coin = createImageLabel("", "ProjectJava/Image/Coin.png", 94, 50, 35, 35);
+        jLabel_Barrier_Car = createImageLabel("", "ProjectJava/Image/Barrier_Car_01.png", 183, 200, 50, 80);
+        jLabel_Barrier_Fence = createImageLabel("", "ProjectJava/Image/Barrier_Fence.png", 247, 200, 50, 30);
         
         jPanel_Center.add(jLabel_Car);
         jPanel_Center.add(jLabel_Coin);
@@ -56,14 +56,14 @@ public class CarGameView extends ImageFactory {
         jPanel_Center.add(jLabel_Barrier_Fence);
         jPanel_Center.add(jLabel_Road);
 
-        jPanel_Left = createImagePanel("Image/Roadside_Left.png", 0, 0, 160, 700);
-	jButton_Pause = createButton("PAUSE", "Image/Button_01.png", 5, 5, 80, 30);
+        jPanel_Left = createImagePanel("ProjectJava/Image/Roadside_Left.png", 0, 0, 160, 700);
+	jButton_Pause = createButton("PAUSE", "ProjectJava/Image/Button_01.png", 5, 5, 80, 30);
 	jPanel_Left.add(jButton_Pause);
 
-        jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
-	jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
-	jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
-	jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 73, 46, 17, 17);
+        jPanel_Right = createImagePanel("ProjectJava/Image/Roadside_Right.png", 480, 0, 160, 700);
+	jTextField_Point = createTextField("0", "ProjectJava/Image/Button_01.png", 65, 5, 80, 30);
+	jTextField_Coin = createTextField("0", "ProjectJava/Image/Button_01.png", 65, 40, 80, 30);
+	jLabel_IconCoin = createImageLabel("", "ProjectJava/Image/IconCoin.png", 73, 46, 17, 17);
 	jPanel_Right.add(jTextField_Point);
 	jPanel_Right.add(jLabel_IconCoin);
 	jPanel_Right.add(jTextField_Coin);
