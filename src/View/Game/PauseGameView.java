@@ -48,6 +48,7 @@ public class PauseGameView extends ImageFactory{
         jPanel_PauseView.add(jButton_PlayAgain);
         jPanel_PauseView.add(jButton_Home);
         jFrame.add(jPanel_PauseView);
+        setVisible(true);
     }
     public void setVisible(boolean a){
         jFrame.setVisible(a);
@@ -79,5 +80,4 @@ public class PauseGameView extends ImageFactory{
     public void dispose() {
         jFrame.dispose();
     }
-
 }

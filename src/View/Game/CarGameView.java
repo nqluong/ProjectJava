@@ -1,27 +1,10 @@
 package View.Game;
 
-import Controller.ControllerGame.CarController;
-import Controller.ControllerGame.GameOverController;
-import Controller.ControllerGame.PauseGameController;
-import Model.ModelGame.Obstacle;
-import Model.ModelGame.CarModel;
-import Model.ModelGame.CoinModel;
-import Model.ModelGame.Obstacles;
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Image;
-import Model.ModelGame.CoinModel;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
-import View.Game.*;
-import java.awt.event.KeyEvent;
+import Controller.ControllerGame.*;
+import Model.ModelGame.*;
+import java.awt.*;
+import javax.swing.*;
 import java.awt.event.KeyListener;
-import java.util.Scanner;
 
 public class CarGameView extends ImageFactory {
 
@@ -34,13 +17,13 @@ public class CarGameView extends ImageFactory {
     private JLabel jLabelObstacle_Two, jLabelObstacle_Three, jLabel_IconCoin, jLabel_Car, jLabel_Coin, jLabel_Barrier_Car, jLabel_Barrier_Fence;
     private JTextField jTextField_Point, jTextField_Coin;
     private RoadLabel jLabel_Road;
+    private boolean check = false;
 
     public CarGameView() {
         this.init();
         carModel = new CarModel(jLabel_Car);
-        coinModel = new CoinModel(this, carModel, -50);
+        coinModel = new CoinModel(this, carModel, -100);
         obstacles = new Obstacles(this, carModel, coinModel, jLabel_Road);
-
         jFrame.setVisible(true);
     }
 
@@ -82,7 +65,7 @@ public class CarGameView extends ImageFactory {
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
         jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
         jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
-        jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 173, 46, 30, 30);
+        jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 25, 46, 30, 30);
         jPanel_Right.add(jTextField_Point);
         jPanel_Right.add(jLabel_IconCoin);
         jPanel_Right.add(jTextField_Coin);
@@ -159,18 +142,17 @@ public class CarGameView extends ImageFactory {
     }
 
     public void showPauseGame() {
+        jFrame.setVisible(false);
         PauseGameView pauseView = new PauseGameView(this);
         new PauseGameController(pauseView, this);
-        pauseView.setVisible(true);
         pauseGame();
-
     }
 
     public void resumeGame() {
+        jFrame.setVisible(true);
         new CarController(this);
         jFrame.requestFocusInWindow();
         continueGame();
-
     }
 
     public void dispose() {
@@ -182,32 +164,12 @@ public class CarGameView extends ImageFactory {
     }
 
     public void pauseGame() {
-        coinModel.pauseGame();
         obstacles.pauseGame();
     }
 
     public void continueGame() {
-        //   CarController car = new CarController(this);
         coinModel.continueGame();
         obstacles.continueGame();
     }
 
-    public static void main(String[] args) {
-        CarGameView view = new CarGameView();
-        CarController carController = new CarController(view);
-        view.startGame();
-        Scanner sc = new Scanner(System.in);
-        int index = sc.nextInt();
-
-        if (index == 1) {
-            view.pauseGame();
-        }
-
-        int x = sc.nextInt();
-        if (x == 2) {
-            view.continueGame();
-        }
-        System.out.println("đa nhap: " + index);
-        System.out.println("đa nhap: " + x);
-    }
 }

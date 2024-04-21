@@ -2,10 +2,6 @@ package Model.ModelGame;
 
 import javax.swing.JLabel;
 
-/**
- *
- * @author nguye
- */
 public class CarModel {
 
     private JLabel carLabel;
@@ -16,14 +12,15 @@ public class CarModel {
         this.x = carLabel.getX();
         this.y = carLabel.getY();
     }
-    
-    public void moveLeft(){
-        if(x >= 80) {
+
+    public void moveLeft() {
+        if (x >= 80) {
             carLabel.setLocation(x -= 80, y);
         }
     }
-    public void moveRight(){
-        if(x < 240) {
+
+    public void moveRight() {
+        if (x < 240) {
             carLabel.setLocation(x += 80, y);
         }
     }
@@ -47,5 +44,5 @@ public class CarModel {
     public JLabel getCarLabel() {
         return carLabel;
     }
-    
+
 }

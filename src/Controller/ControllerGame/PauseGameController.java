@@ -41,7 +41,7 @@ public class PauseGameController {
         public void actionPerformed(ActionEvent e) {
             pauseView.dispose();
             MainMenuView mainMenuView = new MainMenuView();
-            new MainMenuController(mainMenuView);
+            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
             mainMenuView.showMainMenu();
         }
 

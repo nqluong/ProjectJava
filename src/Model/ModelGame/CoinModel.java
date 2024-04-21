@@ -35,11 +35,12 @@ public class CoinModel extends Thread {
         int newY, x;
         if(allRandom){
             int index = rd.nextInt(4);
-            x = index * 80 + 10;
+            x = index * 80 + 25;
+            
             view.getjLabel_Coin().setLocation(x, y);
         } else x = pauseX;
         boolean collisionChecked = false;
-       
+        allRandom = true;
         while (view.getCoinY() < 700 && !paused && running) {
             newY = view.getCoinY() + roadspeed;
             view.getjLabel_Coin().setLocation(x, newY);

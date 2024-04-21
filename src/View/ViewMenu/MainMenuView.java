@@ -2,6 +2,7 @@ package View.ViewMenu;
 
 //import Model.ModelGame.Obstacle;
 import Controller.ControllerGame.CarController;
+import Controller.ControllerGame.CarGameController;
 import Controller.ControllerMenu.HighScoreController;
 import Controller.ControllerMenu.InstructionsController;
 //import Model.ModelGame.Obstacle;
@@ -50,9 +51,9 @@ public class MainMenuView extends ImageFactory {
 
     public void showGame() {
         jFrame.dispose();
-
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
+        CarGameController carGame = new CarGameController(view);
         view.startGame();
         view.setVisible(true);
     }
