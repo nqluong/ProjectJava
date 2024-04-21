@@ -5,22 +5,21 @@ import java.util.Random;
 import javax.swing.*;
 
 public class Obstacle extends Thread {
-    private boolean allRandom = true;
     private Obstacles obstacles;
     private JLabel label;
     private int x, y, speed;
     private int pauseX, pauseY;
     private boolean running = true;
     private boolean paused = false;
-    
+    private boolean allRandom = true;
     Random rd = new Random();
     private CarModel car ;
     private int score=0;
     private boolean crossed = false; 
-    public Obstacle(JLabel label, int speed) {
+    public Obstacle(JLabel label, int speed,int y) {
         this.label = label;
         this.speed = speed;
-        y = label.getY();
+        this.y = y;
     }
 
     public void run() {
@@ -34,24 +33,23 @@ public class Obstacle extends Thread {
                 }
             }
             
-            if(allRandom){
+            if(allRandom ){
                 int index = rd.nextInt(4);
                 x = index * 80 + 10;
             }else x = pauseX;
             
-            while (label.getY() < 700 && !paused) {
+            while (label.getY() < 700 && !paused && running) {
                 int newY = label.getY()+ speed;
                 label.setLocation(x, newY);
                 if (judgeStop()) {
-                    obstacles.stopGame();
-                    return;
+                    obstacles.overGame();
                 }
                 if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
                 crossed = true;
                 obstacles.increasescore();
                 }
                 try {
-                    sleep(20);
+                    sleep(15);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -73,7 +71,7 @@ public class Obstacle extends Thread {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    public void stopRunning(){
+    public void overGame(){
         running = false;
     }
     public void pause() {
@@ -88,7 +86,6 @@ public class Obstacle extends Thread {
         paused = false;
         allRandom = false;
         label.setLocation(pauseX, pauseY);
-        
     }
     public boolean judgeStop() {
         boolean flag = false;

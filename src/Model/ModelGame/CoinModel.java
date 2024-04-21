@@ -10,30 +10,23 @@ public class CoinModel extends Thread {
     private CarGameView view;
     private int roadspeed=2;
     private int pauseX, pauseY, y;
+    private boolean running = true;
 
-    public void setRoadspeed(int roadspeed) {
-        this.roadspeed = roadspeed;
-    }
-
-    public void setCoin(int coin) {
-        this.coin = coin;
-    }
     private CarModel car;
     private int coin = 0 ;
     Random rd = new Random();
-    public CoinModel(CarGameView view,CarModel car) {
+    public CoinModel(CarGameView view,CarModel car, int y) {
         this.view=view;
         this.car=car;
-        y = view.getjLabel_Coin().getY();
+        this.y = y;
     }
  
 
    public void run() {
-    while (true) {
-        
+    while (running) {
         if(paused){
                 try{
-                    sleep(20);
+                    sleep(15);
                     continue;
                 }catch(InterruptedException e){
                     e.printStackTrace();
@@ -43,11 +36,11 @@ public class CoinModel extends Thread {
         if(allRandom){
             int index = rd.nextInt(4);
             x = index * 80 + 10;
+            view.getjLabel_Coin().setLocation(x, y);
         } else x = pauseX;
         boolean collisionChecked = false;
-        
-        
-        while (view.getCoinY() < 700 && !paused) {
+       
+        while (view.getCoinY() < 700 && !paused && running) {
             newY = view.getCoinY() + roadspeed;
             view.getjLabel_Coin().setLocation(x, newY);
             if(!collisionChecked && collision()) {
@@ -57,7 +50,7 @@ public class CoinModel extends Thread {
             }
             try {
                 
-                sleep(20);
+                sleep(15);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -113,5 +106,14 @@ public class CoinModel extends Thread {
         paused = false;
         allRandom = false;
         view.getjLabel_Coin().setLocation(pauseX, pauseY);
+    }
+        public void setRoadspeed(int roadspeed) {
+        this.roadspeed = roadspeed;
+    }
+    public void overGame(){
+        running = false;
+    }
+    public void setCoin(int coin) {
+        this.coin = coin;
     }
 }

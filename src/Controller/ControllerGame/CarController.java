@@ -45,9 +45,8 @@ public class CarController implements KeyListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-            view.dispose();
-            PauseGameView pauseView = new PauseGameView();
-            new PauseGameController(pauseView);
+           // view.dispose();  
+           view.showPauseGame();
         }
         
     }
