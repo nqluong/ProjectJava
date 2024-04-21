@@ -24,7 +24,6 @@ public class GameOverController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
            overView.dispose();
            MainMenuView mainMenuView = new MainMenuView();
            new MainMenuController(mainMenuView);
@@ -37,11 +36,11 @@ public class GameOverController {
         @Override
         public void actionPerformed(ActionEvent e) {
             overView.dispose();
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             CarGameView gameView = new CarGameView();
             CarController  carController = new CarController(gameView);
+            CarGameController carGame = new CarGameController(gameView);
             gameView.startGame();
-            //gameView.setVisible(true);
+            
         }
         
     }
@@ -49,7 +48,6 @@ public class GameOverController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             overView.dispose();
             overView.showSave();
         }

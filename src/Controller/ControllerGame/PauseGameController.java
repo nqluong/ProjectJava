@@ -14,34 +14,48 @@ import java.awt.event.ActionListener;
 public class PauseGameController {
 
     private PauseGameView pauseView;
+    private CarGameView view;
 
-    public PauseGameController(PauseGameView pauseView) {
+    public PauseGameController(PauseGameView pauseView, CarGameView view) {
         this.pauseView = pauseView;
+        this.view = view;
         pauseView.getjButton_Home().addActionListener(new HomeButtonListener());
         pauseView.getjButton_PlayAgain().addActionListener(new PlayAgainListener());
+        pauseView.getjButton_Resume().addActionListener(new ResumeButtonListener());
     }
 
     private class PlayAgainListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
             pauseView.dispose();
             CarGameView gameView = new CarGameView();
             CarController carController = new CarController(gameView);
         }
 
     }
-       private class HomeButtonListener implements ActionListener{
+
+    private class HomeButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-           // throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-           pauseView.dispose();
-           MainMenuView mainMenuView = new MainMenuView();
-           new MainMenuController(mainMenuView);
-           mainMenuView.showMainMenu();
+            pauseView.dispose();
+            MainMenuView mainMenuView = new MainMenuView();
+            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
+            mainMenuView.showMainMenu();
         }
- 
+
+    }
+
+    private class ResumeButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            pauseView.dispose();
+            view.resumeGame();
+            //new CarController(view);
+            
+        }
+
     }
 }

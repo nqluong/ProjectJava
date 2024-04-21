@@ -53,7 +53,4 @@ public class InstructionsView extends ImageFactory {
         jFrame.dispose();
     }
     
-    public static void main(String[] args) {
-        new InstructionsView();
-    }
 }

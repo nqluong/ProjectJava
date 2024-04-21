@@ -5,20 +5,41 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RoadLabel extends JLabel implements ActionListener {
+public class RoadLabel extends JLabel {
+
     private Image roadImage;
-    private int roadY = 0; // Vị trí của ảnh đường theo trục Y
-    private int roadSpeed = 4; // Tốc độ di chuyển của đường
-    private Timer timer;
+    private int roadY = 0;
+    private int roadSpeed = 2;
+    private Thread animationThread;
+    private boolean paused = false, running = true;
 
     public RoadLabel(String imagePath) {
         ImageIcon icon = new ImageIcon(imagePath);
         roadImage = icon.getImage();
         setPreferredSize(new Dimension(icon.getIconWidth(), icon.getIconHeight()));
-        
-        // Khởi tạo và bắt đầu Timer để cập nhật vị trí của ảnh
-        timer = new Timer(20, this);
-        timer.start();
+
+        animationThread = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (running) {
+                    if (!paused) {
+                        roadY += roadSpeed;
+                        if (roadY >= getHeight()) {
+                            roadY = 0;
+                        }
+                        // Yêu cầu vẽ lại JLabel để cập nhật hiển thị
+                        repaint();
+                    }
+
+                    try {
+                        Thread.sleep(15);
+                    } catch (InterruptedException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            }
+        });
+        animationThread.start();
     }
 
     @Override
@@ -29,16 +50,22 @@ public class RoadLabel extends JLabel implements ActionListener {
         // Vẽ lại ảnh đường ở phía trên để tạo hiệu ứng lặp lại
         g.drawImage(roadImage, 0, roadY - getHeight(), getWidth(), getHeight(), this);
     }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        // Cập nhật vị trí của đường
-        roadY += roadSpeed;
-        // Nếu ảnh đường di chuyển ra khỏi phía dưới của JLabel, đặt lại vị trí
-        if (roadY >= getHeight()) {
-            roadY = 0;
-        }
-        // Yêu cầu vẽ lại JLabel để cập nhật hiển thị
-        repaint();
+    public void pauseAnimation(){
+        paused = true;
     }
+    public void resumeAnimation(){
+        paused = false;
+    }
+    public void overGame(){
+        running = false;
+    }
+
+    public int getRoadSpeed() {
+        return roadSpeed;
+    }
+
+    public void setRoadSpeed(int roadSpeed) {
+        this.roadSpeed = roadSpeed;
+    }
+    
 }

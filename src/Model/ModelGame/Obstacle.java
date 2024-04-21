@@ -12,56 +12,55 @@ public class Obstacle extends Thread {
     private int pauseX, pauseY;
     private boolean running = true;
     private boolean paused = false;
+    private boolean allRandom = true;
     Random rd = new Random();
-    private CarModel car ;
-    private int score=0;
-    private boolean crossed = false; 
-    public Obstacle(JLabel label, int speed, int x,int y) {
+    private CarModel car;
+    private int score = 0;
+    private boolean crossed = false;
+
+    public Obstacle(JLabel label, int speed, int y) {
         this.label = label;
         this.speed = speed;
-        this.x = x;
         this.y = y;
     }
 
     public void run() {
-        //int preIndex = -1;
         while (running) {
-            int index;
-            index = rd.nextInt(4);
-
-            int newY;
-
-            int x = index * 80 + 10;
-
-            while (paused) {
+            if (paused) {
                 try {
-                    synchronized (this) {
-                        wait();
-                    }
-                } catch (InterruptedException ex) {
-                    ex.printStackTrace();
-                }
-            }
-            label.setLocation(x, y);
-            while (label.getY() < 700 && !paused) {
-                newY = label.getY() + speed;
-                label.setLocation(x, newY);
-                if (judgeStop()) {
-                    obstacles.stopGame();
-                    return;
-                }
-                if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
-                crossed = true;
-                obstacles.increasescore();
-                }
-                try {
-                    sleep(20);
+                    sleep(10);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-              crossed = false; 
-            label.setLocation(x, y);
+            if (allRandom) {
+                int index = rd.nextInt(4);
+                x = index * 80 + 10;
+            } else {
+                x = pauseX;
+            }
+            allRandom = true;
+            while (label.getY() < 700 && !paused && running) {
+                int newY = label.getY() + speed;
+                label.setLocation(x, newY);
+                if (judgeStop()) {
+                    obstacles.overGame();
+                }
+                if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
+                    crossed = true;
+                    obstacles.increasescore();
+                }
+                try {
+                    sleep(15);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+            crossed = false;
+            if (!paused) {
+                label.setLocation(x, y);
+            }
         }
     }
 
@@ -77,17 +76,24 @@ public class Obstacle extends Thread {
         this.speed = speed;
     }
 
+    public void overGame() {
+        running = false;
+    }
+
     public void pause() {
         paused = true;
+        pauseX = label.getX();
+        pauseY = label.getY();
     }
-    public void resumed(){
-        paused = false;
-        synchronized (this) {
-            notify();
-        }
-    }
+
     public void setCar(CarModel car) {
         this.car = car;
+    }
+
+    public void continueGame() {
+        paused = false;
+        allRandom = false;
+        label.setLocation(pauseX, pauseY);
     }
 
     public boolean judgeStop() {
@@ -101,13 +107,15 @@ public class Obstacle extends Thread {
         }
         return flag;
     }
+
     public boolean collision() {
-         boolean flag = false;
-        if(car.getCarLabel().getHeight() <= label.getHeight()){
+        boolean flag = false;
+        if (car.getCarLabel().getHeight() <= label.getHeight()) {
             flag = true;
         }
         return flag;
     }
+
     public void setObstacles(Obstacles obstacles) {
         this.obstacles = obstacles;
     }
@@ -115,6 +123,5 @@ public class Obstacle extends Thread {
     public int getScore() {
         return score;
     }
-    
 
 }
