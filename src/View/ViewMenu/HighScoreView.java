@@ -48,9 +48,6 @@ public class HighScoreView extends ImageFactory {
     public void setVisible(boolean b) {
         jFrame.setVisible(true);
     } 
-    public static void main(String[] args) {
-        new HighScoreView();
-    }
 
     public void dispose() {
         jFrame.dispose();

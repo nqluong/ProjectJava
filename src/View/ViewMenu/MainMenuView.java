@@ -1,9 +1,17 @@
 package ProjectJava.src.View.ViewMenu;
 
+<<<<<<< HEAD
 import ProjectJava.src.Controller.ControllerGame.CarController;
 import ProjectJava.src.Controller.ControllerMenu.HighScoreController;
 import ProjectJava.src.Controller.ControllerMenu.InstructionsController;
 import ProjectJava.src.Controller.ControllerGame.CarController;
+=======
+//import Model.ModelGame.Obstacle;
+import Controller.ControllerGame.CarController;
+import Controller.ControllerMenu.HighScoreController;
+import Controller.ControllerMenu.InstructionsController;
+//import Model.ModelGame.Obstacle;
+>>>>>>> 59989e474245ec33b1f4bbd1b04eac37f4ff5957
 import javax.swing.*;
 import java.awt.*;
 import ProjectJava.src.View.Game.*;
@@ -17,7 +25,9 @@ public class MainMenuView extends ImageFactory {
     public MainMenuView() {
         this.init();
         jFrame.setVisible(true);
-    };
+    }
+
+    ;
     
     private void init() {
         jFrame = new JFrame();
@@ -26,17 +36,29 @@ public class MainMenuView extends ImageFactory {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
+<<<<<<< HEAD
         
         mainMenuPanel = createImagePanel("ProjectJava/Image/NenCar_01.png", 0, 0, 640, 700);
+=======
+
+        mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
+>>>>>>> 59989e474245ec33b1f4bbd1b04eac37f4ff5957
 
         JLabel titleLabel = new JLabel("Racing 2D");
         titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
         titleLabel.setForeground(Color.WHITE);
         titleLabel.setBounds(250, 30, 160, 30);
+<<<<<<< HEAD
         
         startButton = createButton("Bắt đầu", "ProjectJava/Image/Button_01.png", 262, 100, 116, 40);
         highScoreButton = createButton("Điểm cao", "ProjectJava/Image/Button_01.png", 262, 180, 116, 40);
         instructionsButton = createButton("Hướng dẫn", "ProjectJava/Image/Button_01.png", 262, 260, 116, 40);
+=======
+
+        startButton = createButton("Bắt đầu", "Image/Button_01.png", 262, 100, 116, 40);
+        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 262, 180, 116, 40);
+        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 262, 260, 116, 40);
+>>>>>>> 59989e474245ec33b1f4bbd1b04eac37f4ff5957
 
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);
@@ -45,13 +67,15 @@ public class MainMenuView extends ImageFactory {
         jFrame.add(mainMenuPanel);
     }
 
-    public void showGame(){
+    public void showGame() {
         jFrame.dispose();
-        CarGameView gameView = new CarGameView();
-        CarController carController = new CarController(gameView);
-        carController.start();
-        gameView.setVisible(true);
+
+        CarGameView view = new CarGameView();
+        CarController carController = new CarController(view);
+        view.startGame();
+        view.setVisible(true);
     }
+
     //gọi giao diện điểm cao
     public void showHighScoreView() {
         jFrame.dispose();
@@ -60,6 +84,7 @@ public class MainMenuView extends ImageFactory {
         HighScoreController highScoreController = new HighScoreController(highview);
         highview.setVisible(true);
     }
+
     //gọi giao diện hướng dẫn
     public void showInstrctionsView() {
         jFrame.dispose();
@@ -83,6 +108,7 @@ public class MainMenuView extends ImageFactory {
     public void setInstructionsButton(JButton instructionsButton) {
         this.instructionsButton = instructionsButton;
     }
+
     //gọi giao diện menu
     public void showMainMenu() {
         jFrame.setVisible(true);
@@ -99,8 +125,9 @@ public class MainMenuView extends ImageFactory {
     public void setStartButton(JButton startButton) {
         this.startButton = startButton;
     }
+
     public void dispose() {
         jFrame.dispose();
     }
-    
+
 }

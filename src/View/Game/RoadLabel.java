@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class RoadLabel extends JLabel implements ActionListener {
     private Image roadImage;
     private int roadY = 0; // Vị trí của ảnh đường theo trục Y
-    private int roadSpeed = 3; // Tốc độ di chuyển của đường
+    private int roadSpeed = 4; // Tốc độ di chuyển của đường
     private Timer timer;
 
     public RoadLabel(String imagePath) {
