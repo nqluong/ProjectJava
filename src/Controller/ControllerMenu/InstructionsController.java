@@ -6,8 +6,10 @@ import java.awt.event.*;
 public class InstructionsController {
 
     private InstructionsView instructionsView;
-    public InstructionsController(InstructionsView instructionsView) {
+    private MainMenuView viewMenu;
+    public InstructionsController(InstructionsView instructionsView, MainMenuView viewMenu) {
         this.instructionsView = instructionsView;
+        this.viewMenu = viewMenu;
         instructionsView.getHomeButton().addActionListener(new HomeButtonlistener());
 
     }
@@ -17,9 +19,10 @@ public class InstructionsController {
         @Override
         public void actionPerformed(ActionEvent e) {
             instructionsView.dispose();
-            MainMenuView mainMenuView = new MainMenuView();
-            new MainMenuController(mainMenuView);
-            mainMenuView.showMainMenu();
+            viewMenu.showMainMenu();
+//            MainMenuView mainMenuView = new MainMenuView();
+//            new MainMenuController(mainMenuView);
+//            mainMenuView.showMainMenu();
         }
 
     }

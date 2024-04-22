@@ -54,7 +54,8 @@ public class MainMenuView extends ImageFactory {
     }
 
     public void showGame() {
-        jFrame.dispose();
+        //jFrame.dispose();
+        jFrame.setVisible(false);
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
         CarGameController carGame = new CarGameController(view);
@@ -64,7 +65,8 @@ public class MainMenuView extends ImageFactory {
 
     //gọi giao diện điểm cao
     public void showHighScoreView() {
-        jFrame.dispose();
+        //jFrame.dispose();
+        jFrame.setVisible(false);
         HighScoreView highview = new HighScoreView();
         //tạo controller điểm cao để xử lý các sự kiện trong giao diện điểm cao
         HighScoreController highScoreController = new HighScoreController(highview);
@@ -73,16 +75,18 @@ public class MainMenuView extends ImageFactory {
 
     //gọi giao diện hướng dẫn
     public void showInstrctionsView() {
+        
         InstructionsView instructionsView = new InstructionsView();
-        new InstructionsController(instructionsView);
+        new InstructionsController(instructionsView, this);
         instructionsView.setVisible(true);
+        //jFrame.setVisible(false);
     }
     
     
     public void showMainMenu() {
-        jFrame.setVisible(true);
-        mainMenuController = new MainMenuController(this);
         
+        mainMenuController = new MainMenuController(this);
+        jFrame.setVisible(true);
     }
     
     public static void playSound(String soundFile) {
