@@ -49,6 +49,7 @@ public class Obstacle extends Thread {
                 }
                 if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
                     crossed = true;
+                    obstacles.playSound("Sound/VuotVatCan.wav");
                     obstacles.increasescore();
                 }
                 try {

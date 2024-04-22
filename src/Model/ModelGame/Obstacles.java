@@ -7,6 +7,10 @@ import java.util.Random;
 import javax.swing.JLabel;
 import Model.ModelGame.Obstacle;
 import View.Game.RoadLabel;
+import java.io.File;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 
 /**
  *
@@ -91,5 +95,19 @@ public class Obstacles {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public static void playSound(String soundFile) {
+        try {
+            File file = new File(soundFile);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            //clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
