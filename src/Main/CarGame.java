@@ -10,6 +10,6 @@ public class CarGame {
           MainMenuView mainMenuView = new MainMenuView();
           mainMenuView.setVisible();
           MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
-          mainMenuView.playSound("Image/y2meta.wav");
+          mainMenuView.playSound("Sound/NhacNen.wav");
     }
 }
