@@ -37,12 +37,7 @@ public class HighScoreView extends ImageFactory {
         jFrame.add(highScorePanel);
     }
     
-    public void showHighScoreView() {
-        jFrame.dispose();
-        HighScoreView highview = new HighScoreView();
-        HighScoreController highScoreController = new HighScoreController(highview);
-        highview.setVisible(true);
-    }
+
 
     public JButton getHomeButton() {
         return homeButton;

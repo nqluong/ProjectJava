@@ -6,47 +6,61 @@ import javax.swing.*;
 
 public class Obstacle extends Thread {
 
+    private Obstacles obstacles;
     private JLabel label;
-    private int y, speed;
-    private int x, newY;
-    private volatile boolean running = true;
+    private int x, y, speed;
+    private int pauseX, pauseY;
+    private boolean running = true;
+    private boolean paused = false;
+    private boolean allRandom = true;
     Random rd = new Random();
+    private CarModel car;
+    private int score = 0;
+    private boolean crossed = false;
 
-    public Obstacle(JLabel label, int speed, int y, int x) {
+    public Obstacle(JLabel label, int speed, int y) {
         this.label = label;
         this.speed = speed;
-        this.newY = -y;
-        this.x = x * rd.nextInt(4) * 80 +10;
+        this.y = y;
     }
 
     public void run() {
-        //int preIndex = -1;
         while (running) {
-            if(running==true){
-                System.out.println("Model");
-            }
-            while (label.getY() < 700 && running) {
-                newY += speed;
-                label.setLocation(x, newY);
+            if (paused) {
                 try {
-                    sleep(20);
+                    sleep(10);
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
-            
-            if(running == true){
-                System.out.println("Model.ModelGame.Obstacle.run()");
+            if (allRandom) {
+                int index = rd.nextInt(4);
+                x = index * 80 + 10;
+            } else {
+                x = pauseX;
             }
-            
-            if(label.getY() >= 700 && true){
-                newY = -y;
-                x = x* rd.nextInt(4) * 80 + 10;
+            allRandom = true;
+            while (label.getY() < 700 && !paused && running) {
+                int newY = label.getY() + speed;
+                label.setLocation(x, newY);
+                if (judgeStop()) {
+                    obstacles.overGame();
+                }
+                if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
+                    crossed = true;
+                    obstacles.increasescore();
+                }
+                try {
+                    sleep(15);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
-//            startX = x;
-//            startY = newY;
-//        
-//            label.setLocation(startX, startY);
+            crossed = false;
+            if (!paused) {
+                label.setLocation(x, y);
+            }
         }
     }
 
@@ -61,11 +75,53 @@ public class Obstacle extends Thread {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    public void stopRunning(){
+
+    public void overGame() {
         running = false;
     }
-    public void countinueRunning(){
-        this.running = true;
-        label.setLocation(x, newY);
+
+    public void pause() {
+        paused = true;
+        pauseX = label.getX();
+        pauseY = label.getY();
     }
+
+    public void setCar(CarModel car) {
+        this.car = car;
+    }
+
+    public void continueGame() {
+        paused = false;
+        allRandom = false;
+        label.setLocation(pauseX, pauseY);
+    }
+
+    public boolean judgeStop() {
+        boolean flag = false;
+        int carRight = car.getX() + car.getCarLabel().getWidth();
+        int carBottom = car.getY() + car.getCarLabel().getHeight();
+        int obstacleRight = label.getX() + label.getWidth();
+        int obstacleBottom = label.getY() + label.getHeight();
+        if (car.getX() < obstacleRight && carRight > label.getX() && car.getY() < obstacleBottom && carBottom > label.getY()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public boolean collision() {
+        boolean flag = false;
+        if (car.getCarLabel().getHeight() <= label.getHeight()) {
+            flag = true;
+        }
+        return flag;
+    }
+
+    public void setObstacles(Obstacles obstacles) {
+        this.obstacles = obstacles;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
 }

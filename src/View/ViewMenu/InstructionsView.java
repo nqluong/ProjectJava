@@ -37,12 +37,7 @@ public class InstructionsView extends ImageFactory {
         jFrame.add(instructionsPanel);
     }
     
-    public void showInstrctionsView() {
-        jFrame.dispose();
-        InstructionsView instructionsView = new InstructionsView();
-        InstructionsController instructionsController = new InstructionsController(instructionsView);
-        instructionsView.setVisible(true);
-    }
+
 
     public JButton getHomeButton() {
         return homeButton;
@@ -59,4 +54,5 @@ public class InstructionsView extends ImageFactory {
     public void dispose() {
         jFrame.dispose();
     }
+    
 }

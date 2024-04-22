@@ -1,61 +1,61 @@
-
 package Controller.ControllerGame;
+
 import Controller.ControllerMenu.MainMenuController;
-import Model.ModelGame.Obstacles;
-import View.Game.*;
+import View.Game.CarGameView;
+import View.Game.PauseGameView;
 import View.ViewMenu.MainMenuView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import Model.ModelGame.*;
 
+/**
+ *
+ * @author nguye
+ */
 public class PauseGameController {
-    private PauseGameView pauseGameView;
-    private CarGameView carGameView;
 
+    private PauseGameView pauseView;
+    private CarGameView view;
 
-    public PauseGameController(PauseGameView pauseGameView) {
-        this.pauseGameView = pauseGameView;
-        pauseGameView.getjButton_Resume().addActionListener(new ResumeGameButtonListener());
-        pauseGameView.getjButton_PlayAgain().addActionListener(new PlayAgainGameButtonListener());
-        pauseGameView.getjButton_Home().addActionListener(new HomeGameButtonListener());
+    public PauseGameController(PauseGameView pauseView, CarGameView view) {
+        this.pauseView = pauseView;
+        this.view = view;
+        pauseView.getjButton_Home().addActionListener(new HomeButtonListener());
+        pauseView.getjButton_PlayAgain().addActionListener(new PlayAgainListener());
+        pauseView.getjButton_Resume().addActionListener(new ResumeButtonListener());
     }
-    
-    public class ResumeGameButtonListener implements ActionListener{
+
+    private class PlayAgainListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            pauseGameView.dispose();
-            CarGameView carGameView = new CarGameView();
-            new CarGameController(carGameView);
-//            CarController carController = new CarController(carGameView);
-            
-            Obstacles obstacles = new Obstacles(carGameView);
-            obstacles.continueGame();
-            carGameView.setVisible(true);
+            pauseView.dispose();
+            CarGameView gameView = new CarGameView();
+            CarController carController = new CarController(gameView);
         }
+
     }
-    
-    public class PlayAgainGameButtonListener implements ActionListener{
+
+    private class HomeButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            pauseGameView.dispose();
-            CarGameView carGameView = new CarGameView();
-            new CarGameController(carGameView);
-            CarController carController = new CarController(carGameView);
-            Obstacles obstacles = new Obstacles(carGameView);
-            carGameView.setVisible(true);
-        }
-    }
-    
-    public class HomeGameButtonListener implements ActionListener{
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            pauseGameView.dispose();
+            pauseView.dispose();
             MainMenuView mainMenuView = new MainMenuView();
-            new MainMenuController(mainMenuView);
+            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
             mainMenuView.showMainMenu();
         }
+
+    }
+
+    private class ResumeButtonListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            pauseView.dispose();
+            view.resumeGame();
+            //new CarController(view);
+            
+        }
+
     }
 }

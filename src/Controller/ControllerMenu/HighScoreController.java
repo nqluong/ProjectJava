@@ -15,8 +15,13 @@ public class HighScoreController {
     
     private class HomeButtonListener implements ActionListener{
         @Override
-        public void actionPerformed(ActionEvent e) {
+                public void actionPerformed(ActionEvent e) {
                 highView.dispose();
+                MainMenuView mainMenuView = new MainMenuView();
+                //tạo controller cho menu
+                new MainMenuController(mainMenuView);
+                mainMenuView.showMainMenu();
+                
         }
         
     }

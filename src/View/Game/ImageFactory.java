@@ -68,7 +68,7 @@ public class ImageFactory {
     }
 
     protected JTextField createTextField(String text, String imagePath, int x, int y, int width, int height) {
-        JTextField textField = new JTextField() {
+        JTextField textField = new JTextField(text) {
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -78,9 +78,9 @@ public class ImageFactory {
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Arial", Font.BOLD, 16));
                 FontMetrics fm = g.getFontMetrics();
-                int x = (getWidth() - fm.stringWidth(text)) / 3;
-                int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g.drawString(text, getWidth() - x, y);
+            int textX = (getWidth() - fm.stringWidth(getText())) / 2;
+            int textY = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
+            g.drawString(getText(), textX, textY);
             }
         };
         textField.setBounds(x, y, width, height);

@@ -1,29 +1,25 @@
 package Controller.ControllerGame;
-import View.Game.*;
-import Model.ModelGame.*;
+
+import View.Game.CarGameView;
+import View.Game.PauseGameView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class CarGameController {
-    private CarGameView carGameView;
-    
-    public CarGameController(CarGameView carGameView){
-        this.carGameView = carGameView;
-        carGameView.getjButton_Pause().addActionListener(new PauseGameButtonListener());
-        
+
+    private CarGameView view;
+
+    public CarGameController(CarGameView view) {
+        this.view = view;
+        view.getjButton_Pause().addActionListener(new PauseButtonListener());
     }
-    
-    public class PauseGameButtonListener implements ActionListener{
+
+    private class PauseButtonListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
-//            CarGameView carGameView = new CarGameView();
-//            CarController carController = new CarController(carGameView);
-            Obstacles obstacles = new Obstacles(carGameView);
-            obstacles.stopGame();
-            carGameView.showPauseGameView();
+           view.showPauseGame();
         }
+
     }
-    
-    
-    
 }

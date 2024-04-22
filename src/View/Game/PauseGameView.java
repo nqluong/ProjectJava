@@ -8,19 +8,24 @@ import Controller.ControllerGame.*;
 import Model.ModelGame.Obstacles;
 
 public class PauseGameView extends ImageFactory{
-    private CarGameView carGameView;
+    private CarGameView view;
     private CarController carController;
     private JFrame jFrame;
-    private JPanel jPanel_PauseView;
     private JLabel titleLabel;
+    private JPanel jPanel_PauseView;
     private JButton jButton_Resume, jButton_PlayAgain, jButton_Home;
 
-    public PauseGameView() {
+
+//    public PauseGameView(MainMenuView mainMenuView) {
+//        this.init();
+//    }
+
+    public PauseGameView(CarGameView view) {
         this.init();
-        jFrame.setVisible(true);
+        this.view = view;
     }
     
-    private void init() {
+        private void init() {
         jFrame = new JFrame();
         jFrame.setTitle("Racing UTC");
         jFrame.setSize(640, 700);
@@ -40,12 +45,11 @@ public class PauseGameView extends ImageFactory{
         jPanel_PauseView.add(jButton_PlayAgain);
         jPanel_PauseView.add(jButton_Home);
         jFrame.add(jPanel_PauseView);
+            setVisible(true);
     }
-
-    public void setVisible() {
-        jFrame.setVisible(true);
+    public void setVisible(boolean a){
+        jFrame.setVisible(a);
     }
-
     public JButton getjButton_Resume() {
         return jButton_Resume;
     }
@@ -73,9 +77,4 @@ public class PauseGameView extends ImageFactory{
     public void dispose() {
         jFrame.dispose();
     }
-    
-    public static void main(String[] args) {
-        new PauseGameView();
-    }
-
 }

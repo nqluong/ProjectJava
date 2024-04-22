@@ -6,41 +6,90 @@ import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.JLabel;
 import Model.ModelGame.Obstacle;
-import View.Game.PauseGameView;
+import View.Game.RoadLabel;
 
-
+/**
+ *
+ * @author nguye
+ */
 public class Obstacles {
+
     private ArrayList<Obstacle> obstacles = new ArrayList<>();
     private CarGameView view;
+    private CoinModel coin;
+    private RoadLabel road;
     private int roadSpeed = 2;
-    Random random = new Random();
+    private volatile int score = 0;
 
-    public Obstacles() {
-    }
-    
-    
-
-    public Obstacles(CarGameView view) {
+    public Obstacles(CarGameView view, CarModel car, CoinModel coin, RoadLabel road) {
         this.view = view;
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed,view.getBarrier_CarY(), 1));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed,view.getObstacle_ThreeY(), 1));
-        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed,view.getBarrier_FenceY(), 1));
-        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed,view.getObstacle_TwoY(), 1));
+        this.coin = coin;
+        this.road = road;
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Car(), roadSpeed, -200));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Three(), roadSpeed, -300));
+        obstacles.add(new Obstacle(view.getjLabel_Barrier_Fence(), roadSpeed, -400));
+        obstacles.add(new Obstacle(view.getjLabelObstacle_Two(), roadSpeed, -500));
+        for (Obstacle obstacle : obstacles) {
+            obstacle.setCar(car);
+            obstacle.setObstacles(this);
+        }
         startGame();
     }
-    public void startGame(){
+
+    public void startGame() {
         for (Obstacle obstacle : obstacles) {
             obstacle.start();
         }
     }
-    public void stopGame(){
+
+    public void overGame() {
+        coin.overGame();
+        road.overGame();
         for (Obstacle obstacle : obstacles) {
-            obstacle.stopRunning();
+            obstacle.overGame();
         }
+        view.showGameOver();
     }
-    public void continueGame(){
+
+    public void pauseGame() {
         for (Obstacle obstacle : obstacles) {
-            obstacle.countinueRunning();
+            obstacle.pause();
         }
+        coin.pauseGame();
+        road.pauseAnimation();
+    }
+
+    public void continueGame() {
+        for (Obstacle obstacle : obstacles) {
+            obstacle.continueGame();
+        }
+        coin.continueGame();
+        road.resumeAnimation();
+    }
+
+    public void increasescore() {
+        score += 100;
+        view.getjTextField_Point().setText(Integer.toString(score));
+        if (score % 1500 == 0) {
+            updateSpeed();
+        }
+
+    }
+
+    public void setRoadSpeed(int roadSpeed) {
+        this.roadSpeed = roadSpeed;
+    }
+
+    public void updateSpeed() {
+        roadSpeed += 1;
+        for (Obstacle obstacle : obstacles) {
+            obstacle.setSpeed(roadSpeed);
+        }
+        coin.setRoadspeed(roadSpeed);
+        road.setRoadSpeed(roadSpeed);
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

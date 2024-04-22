@@ -25,8 +25,9 @@ public class MainMenuView extends ImageFactory {
 
     public MainMenuView() {
         this.init();
-//        jFrame.setVisible(true);
-    };
+        jFrame.setVisible(true);
+    }
+
     
     private void init() {
         jFrame = new JFrame();
@@ -35,7 +36,7 @@ public class MainMenuView extends ImageFactory {
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
-        
+
         mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
         
         titleLabel = createImageLabel("", "Image/title-Menu.png", 125, 30, 400, 150);
@@ -52,30 +53,36 @@ public class MainMenuView extends ImageFactory {
         jFrame.add(mainMenuPanel);
     }
 
-
-    public void showGame(){
+    public void showGame() {
+        jFrame.dispose();
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
-        Obstacles obstacles = new Obstacles(view);
-        CarGameController carGameController = new CarGameController(view);
+        CarGameController carGame = new CarGameController(view);
+        view.startGame();
         view.setVisible(true);
     }
-    
+
+    //gọi giao diện điểm cao
+    public void showHighScoreView() {
+        jFrame.dispose();
+        HighScoreView highview = new HighScoreView();
+        //tạo controller điểm cao để xử lý các sự kiện trong giao diện điểm cao
+        HighScoreController highScoreController = new HighScoreController(highview);
+        highview.setVisible(true);
+    }
+
+    //gọi giao diện hướng dẫn
     public void showInstrctionsView() {
         InstructionsView instructionsView = new InstructionsView();
         new InstructionsController(instructionsView);
         instructionsView.setVisible(true);
     }
     
-    public void showHighScoreView() {
-        HighScoreView highview = new HighScoreView();
-        new HighScoreController(highview);
-        highview.setVisible(true);
-    }
     
     public void showMainMenu() {
-        mainMenuController = new MainMenuController(this);
         jFrame.setVisible(true);
+        mainMenuController = new MainMenuController(this);
+        
     }
     
     public static void playSound(String soundFile) {
@@ -122,6 +129,8 @@ public class MainMenuView extends ImageFactory {
         this.instructionsButton = instructionsButton;
     }
 
+    //gọi giao diện menu
+
     public JPanel getMainMenuPanel() {
         return mainMenuPanel;
     }
@@ -157,6 +166,4 @@ public class MainMenuView extends ImageFactory {
         jFrame.setVisible(true);
     }
 
-    
-
-}
+  }

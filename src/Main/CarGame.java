@@ -1,10 +1,11 @@
-
 package Main;
+
 //import static View.ViewMenu.MainMenuView.playSound;
 import Controller.ControllerMenu.*;
 import View.ViewMenu.*;
 
 public class CarGame {
+
     public static void main(String[] args) {
           MainMenuView mainMenuView = new MainMenuView();
           mainMenuView.setVisible();
