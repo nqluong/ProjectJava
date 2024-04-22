@@ -11,5 +11,6 @@ public class CarGame {
           mainMenuView.setVisible();
           MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
           mainMenuView.playSound("Sound/NhacNen.wav");
+         
     }
 }

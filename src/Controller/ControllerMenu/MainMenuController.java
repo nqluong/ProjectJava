@@ -76,7 +76,9 @@ public class MainMenuController {
                     view.setButtonText(view.getSoundButton(), "Sound On");
                     isPlaying = true;
                 }
+;
         }
+        
     }
     
       

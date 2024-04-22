@@ -24,8 +24,9 @@ public class Obstacles {
     private RoadLabel road;
     private int roadSpeed = 2;
     private volatile int score = 0;
+    
 
-    public Obstacles(CarGameView view, CarModel car, CoinModel coin, RoadLabel road) {
+    public Obstacles(CarGameView view, CarModel car, CoinModel coin, RoadLabel road ) {
         this.view = view;
         this.coin = coin;
         this.road = road;
@@ -37,6 +38,7 @@ public class Obstacles {
             obstacle.setCar(car);
             obstacle.setObstacles(this);
         }
+        
         startGame();
     }
 
@@ -108,6 +110,11 @@ public class Obstacles {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+    public void setSound(boolean isSound){
+        for (Obstacle obstacle : obstacles) {
+            obstacle.setIsSound(isSound);
         }
     }
 }
