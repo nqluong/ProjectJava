@@ -38,10 +38,10 @@ public class MainMenuView extends ImageFactory {
         mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
         
         titleLabel = createImageLabel("", "Image/title-Menu.png", 125, 30, 400, 150);
-        startButton = createButton("Bắt đầu", "Image/Button_01.png", 245, 230, 150, 50);
-        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 245, 310, 150, 50);
-        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 245, 390, 150, 50);
-        soundButton = createButton("Sound On", "Image/Button_01.png", 245, 470, 150, 50);
+        startButton = createButton("START", "Image/Button_01.png", 245, 230, 150, 50);
+        highScoreButton = createButton("HIGH SCORE", "Image/Button_01.png", 245, 310, 150, 50);
+        instructionsButton = createButton("INSTRUCT", "Image/Button_01.png", 245, 390, 150, 50);
+        soundButton = createButton("SOUND ON", "Image/Button_01.png", 245, 470, 150, 50);
         
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);
