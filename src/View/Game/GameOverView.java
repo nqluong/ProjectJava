@@ -8,9 +8,11 @@ public class GameOverView extends ImageFactory{
     private JFrame jFrame;
     private JPanel jPanel_GameOverView;
     private JButton jButton_PlayAgain, jButton_Home;
+    private JLabel titleLabel;
 
     public GameOverView() {
         this.init();
+        jFrame.setVisible(true);
     }
     
     private void init(){
@@ -23,11 +25,7 @@ public class GameOverView extends ImageFactory{
         
         jPanel_GameOverView = createImagePanel("Image/Background_02.png", 0, 0, 640, 700);
 
-        JLabel titleLabel = new JLabel("Racing 2D");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(250, 30, 160, 30);  
-        
+        titleLabel = createImageLabel("", "Image/title-GameOver.png", 125, 30, 400, 150);
         jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 262, 180, 116, 40);
         jButton_Home = createButton("HOME", "Image/Button_01.png", 262, 260, 116, 40);
 
@@ -39,5 +37,9 @@ public class GameOverView extends ImageFactory{
    
     public void setVisible(boolean b) {
         jFrame.setVisible(true);
+    }
+    
+    public static void main(String[] args) {
+        new GameOverView();
     }
 }

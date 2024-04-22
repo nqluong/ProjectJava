@@ -142,19 +142,21 @@ public class CarGameView extends ImageFactory {
         this.jButton_Pause = jButton_Pause;
     }
 
-//    public static void main(String[] args) {
-//        CarGameView view = new CarGameView();
-//        CarController carController = new CarController(view);
-//        Obstacles obstacles = new Obstacles(view, pauseGameView);
-//        Scanner sc = new Scanner(System.in);
-//        if(sc.nextInt() == 1) obstacles.stopGame();
-//      
-//    }
+    public static void main(String[] args) {
+        CarGameView view = new CarGameView();
+        CarController carController = new CarController(view);
+        CarGameController carGameController = new CarGameController(view);
+        Obstacles obstacles = new Obstacles(view);
+        Scanner sc = new Scanner(System.in);
+        if(sc.nextInt() == 1) obstacles.stopGame();
+        if(sc.nextInt() == 2) obstacles.continueGame();
+      
+    }
     
     public void showPauseGameView(){
         jFrame.setVisible(false);
         PauseGameView pauseGameView = new PauseGameView();
-        new PauseGameController(pauseGameView);
+//        new PauseGameController(pauseGameView);
         pauseGameView.setVisible();
     }
 }

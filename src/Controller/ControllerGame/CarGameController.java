@@ -17,8 +17,7 @@ public class CarGameController {
         @Override
         public void actionPerformed(ActionEvent e) {
 //            CarGameView carGameView = new CarGameView();
-//            CarGameController controller = new CarGameController(carGameView);
-            CarController carController = new CarController(carGameView);
+//            CarController carController = new CarController(carGameView);
             Obstacles obstacles = new Obstacles(carGameView);
             obstacles.stopGame();
             carGameView.showPauseGameView();

@@ -7,25 +7,24 @@ import javax.swing.*;
 public class Obstacle extends Thread {
 
     private JLabel label;
-    private int y, speed, startX, startY;
-    private boolean running = true;
+    private int y, speed;
+    private int x, newY;
+    private volatile boolean running = true;
     Random rd = new Random();
 
-    public Obstacle(JLabel label, int speed, int y) {
+    public Obstacle(JLabel label, int speed, int y, int x) {
         this.label = label;
         this.speed = speed;
-        this.y = y;
+        this.newY = -y;
+        this.x = x * rd.nextInt(4) * 80 +10;
     }
 
     public void run() {
         //int preIndex = -1;
         while (running) {
-            int index;
-            index = rd.nextInt(4);
-
-            int newY = -y;
-            int x = index * 80 + 10;
-
+            if(running==true){
+                System.out.println("Model");
+            }
             while (label.getY() < 700 && running) {
                 newY += speed;
                 label.setLocation(x, newY);
@@ -34,6 +33,15 @@ public class Obstacle extends Thread {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+            
+            if(running == true){
+                System.out.println("Model.ModelGame.Obstacle.run()");
+            }
+            
+            if(label.getY() >= 700 && true){
+                newY = -y;
+                x = x* rd.nextInt(4) * 80 + 10;
             }
 //            startX = x;
 //            startY = newY;
@@ -58,6 +66,6 @@ public class Obstacle extends Thread {
     }
     public void countinueRunning(){
         this.running = true;
-        label.setLocation(startX, startY);
+        label.setLocation(x, newY);
     }
 }

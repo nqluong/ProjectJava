@@ -56,13 +56,14 @@ public class ImageFactory {
                 FontMetrics fm = g.getFontMetrics();
                 int x = (getWidth() - fm.stringWidth(text)) / 2;
                 int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g.drawString(text, x, y);
+                g.drawString(getText(), x, y);
             }
         };
         button.setBounds(x, y, width, height);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
+        button.setText(text);
         return button;
     }
 

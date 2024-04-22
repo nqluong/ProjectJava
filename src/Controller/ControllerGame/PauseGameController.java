@@ -27,7 +27,7 @@ public class PauseGameController {
             pauseGameView.dispose();
             CarGameView carGameView = new CarGameView();
             new CarGameController(carGameView);
-            CarController carController = new CarController(carGameView);
+//            CarController carController = new CarController(carGameView);
             
             Obstacles obstacles = new Obstacles(carGameView);
             obstacles.continueGame();

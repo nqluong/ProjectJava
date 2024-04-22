@@ -17,10 +17,6 @@ public class HighScoreController {
         @Override
         public void actionPerformed(ActionEvent e) {
                 highView.dispose();
-                MainMenuView mainMenuView = new MainMenuView();
-                new MainMenuController(mainMenuView);
-                mainMenuView.showMainMenu();
-                
         }
         
     }

@@ -12,15 +12,12 @@ public class PauseGameView extends ImageFactory{
     private CarController carController;
     private JFrame jFrame;
     private JPanel jPanel_PauseView;
+    private JLabel titleLabel;
     private JButton jButton_Resume, jButton_PlayAgain, jButton_Home;
-
-
-    public PauseGameView(MainMenuView mainMenuView) {
-        this.init();
-    }
 
     public PauseGameView() {
         this.init();
+        jFrame.setVisible(true);
     }
     
     private void init() {
@@ -33,14 +30,10 @@ public class PauseGameView extends ImageFactory{
 
         jPanel_PauseView = createImagePanel("Image/Background_02.png", 0, 0, 640, 700);
 
-        JLabel titleLabel = new JLabel("Racing 2D");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(250, 30, 160, 30);  
-
-        jButton_Resume = createButton("RESUME", "Image/Button_01.png", 262, 100, 116, 40);
-        jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 262, 180, 116, 40);
-        jButton_Home = createButton("HOME", "Image/Button_01.png", 262, 260, 116, 40);
+        titleLabel = createImageLabel("", "Image/title-PauseGame.png", 125, 30, 400, 150);
+        jButton_Resume = createButton("RESUME", "Image/Button_01.png", 262, 200, 150, 50);
+        jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 262, 300, 150, 50);
+        jButton_Home = createButton("HOME", "Image/Button_01.png", 262, 400, 150, 50);
 
         jPanel_PauseView.add(titleLabel);
         jPanel_PauseView.add(jButton_Resume);
@@ -79,6 +72,10 @@ public class PauseGameView extends ImageFactory{
     
     public void dispose() {
         jFrame.dispose();
+    }
+    
+    public static void main(String[] args) {
+        new PauseGameView();
     }
 
 }

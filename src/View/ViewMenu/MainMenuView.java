@@ -6,16 +6,26 @@ import Model.ModelGame.*;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.*;
+import java.io.File;
+import java.io.IOException;
+import javax.sound.sampled.*;
 
 public class MainMenuView extends ImageFactory {
 
     private JFrame jFrame;
     private JPanel mainMenuPanel;
-    private JButton highScoreButton, instructionsButton, startButton;
+    public JButton highScoreButton;
+    public JButton instructionsButton;
+    private JButton startButton;
+    private JButton soundButton;
+    private JLabel titleLabel;
+    private static Clip clip;
+    private static long clipTimePosition;
+    private MainMenuController mainMenuController;
 
     public MainMenuView() {
         this.init();
-        jFrame.setVisible(true);
+//        jFrame.setVisible(true);
     };
     
     private void init() {
@@ -27,25 +37,23 @@ public class MainMenuView extends ImageFactory {
         jFrame.setLayout(null);
         
         mainMenuPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
-
-        JLabel titleLabel = new JLabel("Racing 2D");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(260, 50, 150, 50);
         
-        startButton = createButton("Bắt đầu", "Image/Button_01.png", 245, 195, 150, 50);
-        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 245, 275, 150, 50);
-        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 245, 355, 150, 50);
-
+        titleLabel = createImageLabel("", "Image/title-Menu.png", 125, 30, 400, 150);
+        startButton = createButton("Bắt đầu", "Image/Button_01.png", 245, 230, 150, 50);
+        highScoreButton = createButton("Điểm cao", "Image/Button_01.png", 245, 310, 150, 50);
+        instructionsButton = createButton("Hướng dẫn", "Image/Button_01.png", 245, 390, 150, 50);
+        soundButton = createButton("Sound On", "Image/Button_01.png", 245, 470, 150, 50);
+        
         mainMenuPanel.add(titleLabel);
         mainMenuPanel.add(startButton);
         mainMenuPanel.add(highScoreButton);
         mainMenuPanel.add(instructionsButton);
+        mainMenuPanel.add(soundButton);
         jFrame.add(mainMenuPanel);
     }
 
+
     public void showGame(){
-        jFrame.dispose();
         CarGameView view = new CarGameView();
         CarController carController = new CarController(view);
         Obstacles obstacles = new Obstacles(view);
@@ -54,22 +62,48 @@ public class MainMenuView extends ImageFactory {
     }
     
     public void showInstrctionsView() {
-        jFrame.dispose();
         InstructionsView instructionsView = new InstructionsView();
         new InstructionsController(instructionsView);
         instructionsView.setVisible(true);
     }
     
     public void showHighScoreView() {
-        jFrame.dispose();
         HighScoreView highview = new HighScoreView();
         new HighScoreController(highview);
         highview.setVisible(true);
     }
     
     public void showMainMenu() {
-        new MainMenuController(this);
+        mainMenuController = new MainMenuController(this);
         jFrame.setVisible(true);
+    }
+    
+    public static void playSound(String soundFile) {
+        try {
+            File file = new File(soundFile);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+            clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
+            clip.start();
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public static void pauseSound() {
+        if (clip != null && clip.isRunning()) {
+            clipTimePosition = clip.getMicrosecondPosition(); // Lưu vị trí thời gian hiện tại của clip
+            clip.stop(); // Dừng phát âm thanh
+        }
+    }
+
+    public static void resumeSound() {
+        if (clip != null) {
+            clip.setMicrosecondPosition(clipTimePosition); // Đặt lại vị trí thời gian của clip
+            clip.start(); // Tiếp tục phát âm thanh
+        }
     }
     
     public JButton getHighScoreButton() {
@@ -96,11 +130,33 @@ public class MainMenuView extends ImageFactory {
         return startButton;
     }
 
+    public void setButtonText(JButton button, String text) {
+        button.setText(text); // Đặt văn bản mới cho nút
+    try {
+        button.repaint(); // Vẽ lại nút để hiển thị văn bản mới
+    } catch (Exception ex) {
+        ex.printStackTrace(); // In ra stack trace của ngoại lệ nếu có lỗi
+    }
+}
+
     public void setStartButton(JButton startButton) {
         this.startButton = startButton;
     }
+
+    
+    public JButton getSoundButton() {
+        return soundButton;
+    }
+   
+    
     public void dispose() {
         jFrame.dispose();
     }
+
+    public void setVisible() {
+        jFrame.setVisible(true);
+    }
+
     
+
 }
