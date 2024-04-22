@@ -7,10 +7,6 @@ import View.ViewMenu.MainMenuView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-/**
- *
- * @author nguye
- */
 public class PauseGameController {
 
     private PauseGameView pauseView;
@@ -30,7 +26,9 @@ public class PauseGameController {
         public void actionPerformed(ActionEvent e) {
             pauseView.dispose();
             CarGameView gameView = new CarGameView();
-            CarController carController = new CarController(gameView);
+            CarController  carController = new CarController(gameView);
+            CarGameController carGame = new CarGameController(gameView);
+            gameView.startGame();
         }
 
     }
@@ -40,9 +38,9 @@ public class PauseGameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             pauseView.dispose();
-            MainMenuView mainMenuView = new MainMenuView();
-            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
-            mainMenuView.showMainMenu();
+//            MainMenuView mainMenuView = new MainMenuView();
+//            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
+//            mainMenuView.showMainMenu();
         }
 
     }

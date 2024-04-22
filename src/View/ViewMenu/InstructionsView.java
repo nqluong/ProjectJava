@@ -1,6 +1,7 @@
 
 package View.ViewMenu;
 
+import Controller.ControllerMenu.InstructionsController;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.*;
@@ -8,12 +9,11 @@ import View.Game.*;
 public class InstructionsView extends ImageFactory {
     private JFrame jFrame;
     private JPanel instructionsPanel;
-    private JLabel instruction1Label, instruction2Label;
+    private JLabel instruction1Label, instruction2Label, instruction3Label;
     private JButton homeButton;
     
      public InstructionsView() {
          this.init();
-         jFrame.setVisible(true);
      }
              
     private void init(){
@@ -26,16 +26,20 @@ public class InstructionsView extends ImageFactory {
         
         instructionsPanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
         
-        instruction1Label = createImageLabel("Dùng phím mũi tên để di chuyển", "", 220, 120, 260, 20);
-        instruction2Label = createImageLabel("Tránh chướng ngại vật", "", 260, 160, 180, 20);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 262, 260, 116, 40);
+        instruction1Label = createImageLabel("Dùng phím mũi tên hoặc hai nút A và D", "", 195, 140, 300, 30);
+        instruction2Label = createImageLabel("Để di chuyển tránh chướng ngại vật", "", 195, 180, 300, 30);
+        instruction3Label = createImageLabel("và ăn các đồng tiền", "", 235, 220, 170, 30);
+        homeButton = createButton("Trang chủ", "Image/Button_01.png", 245, 500, 150, 50);
         
         instructionsPanel.add(instruction1Label);
         instructionsPanel.add(instruction2Label);
+        instructionsPanel.add(instruction3Label);
         instructionsPanel.add(homeButton);
         
         jFrame.add(instructionsPanel);
     }
+    
+
 
     public JButton getHomeButton() {
         return homeButton;

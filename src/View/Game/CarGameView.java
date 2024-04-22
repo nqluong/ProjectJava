@@ -25,23 +25,22 @@ public class CarGameView extends ImageFactory {
         coinModel = new CoinModel(this, carModel, -100);
         obstacles = new Obstacles(this, carModel, coinModel, jLabel_Road);
         jFrame.setVisible(true);
+        
     }
 
     public void init() {
         jFrame = new JFrame();
-
-        jFrame.setTitle("Car Game");
+        jFrame.setTitle("Game");
         jFrame.setSize(640, 700);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLocationRelativeTo(null);
         jFrame.setLayout(null);
 
-//	Car, Barrier : 25; 88; 183; 247 Coin: 30; 94; 192; 255
         jPanel_Center = createImagePanel("", 160, 0, 320, 700);
         jLabel_Road = new RoadLabel("Image/Road.png");
         jLabel_Road.setSize(320, 700);
         jLabel_Road.setLayout(null);
-        jLabel_Car = createImageLabel("", "Image/Car_01.png", 10, 530, 60, 80);
+        jLabel_Car = createImageLabel("", "Image/Car_01.png", 5, 530, 75, 75);
 
         jLabel_Coin = createImageLabel("", "Image/Coin.png", 25, -50, 35, 35);
         //vật cản
@@ -65,9 +64,7 @@ public class CarGameView extends ImageFactory {
         jPanel_Right = createImagePanel("Image/Roadside_Right.png", 480, 0, 160, 700);
         jTextField_Point = createTextField("0", "Image/Button_01.png", 65, 5, 80, 30);
         jTextField_Coin = createTextField("0", "Image/Button_01.png", 65, 40, 80, 30);
-        jLabel_IconCoin = createImageLabel("", "Image/IconCoin.png", 25, 46, 30, 30);
         jPanel_Right.add(jTextField_Point);
-        jPanel_Right.add(jLabel_IconCoin);
         jPanel_Right.add(jTextField_Coin);
 
         jFrame.add(jPanel_Center);
@@ -118,9 +115,26 @@ public class CarGameView extends ImageFactory {
     public int getCoinY() {
         return jLabel_Coin.getY();
     }
+    
+    public int getBarrier_CarY() {
+        return jLabel_Barrier_Car.getY();
+    }
+    
+    public int getObstacle_TwoY() {
+        return jLabelObstacle_Two.getY();
+    }
+    
+    public int getObstacle_ThreeY() {
+        return jLabelObstacle_Three.getY();
+    }
+    
+    public int getBarrier_FenceY() {
+        return jLabel_Barrier_Fence.getY();
+    }
+    
 
     public void setVisible(boolean b) {
-        jFrame.setVisible(true);
+        jFrame.setVisible(b);
     }
 
     public void moveLeft() {

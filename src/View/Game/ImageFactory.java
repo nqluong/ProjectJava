@@ -37,8 +37,6 @@ public class ImageFactory {
             }
         };
         label.setBounds(x, y, width, height);
-        label.setFont(new Font("Arial", Font.BOLD, 16));
-        label.setForeground(Color.WHITE);
         label.setOpaque(false);
         return label;
     }
@@ -56,13 +54,14 @@ public class ImageFactory {
                 FontMetrics fm = g.getFontMetrics();
                 int x = (getWidth() - fm.stringWidth(text)) / 2;
                 int y = ((getHeight() - fm.getHeight()) / 2) + fm.getAscent();
-                g.drawString(text, x, y);
+                g.drawString(getText(), x, y);
             }
         };
         button.setBounds(x, y, width, height);
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
         button.setFocusPainted(false);
+        button.setText(text);
         return button;
     }
 
@@ -74,6 +73,7 @@ public class ImageFactory {
                 ImageIcon background = new ImageIcon(imagePath);
                 g.drawImage(background.getImage(), 0, 0, getWidth(), getHeight(), this);
 
+                
                 g.setColor(Color.WHITE);
                 g.setFont(new Font("Arial", Font.BOLD, 16));
                 FontMetrics fm = g.getFontMetrics();
@@ -85,6 +85,7 @@ public class ImageFactory {
         textField.setBounds(x, y, width, height);
         textField.setBorder(null);
         textField.setOpaque(false);
+        textField.setText(text);
         return textField;
     }
 }

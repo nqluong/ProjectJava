@@ -17,7 +17,7 @@ public class Obstacle extends Thread {
     private CarModel car;
     private int score = 0;
     private boolean crossed = false;
-
+    private boolean isSound = true;
     public Obstacle(JLabel label, int speed, int y) {
         this.label = label;
         this.speed = speed;
@@ -49,6 +49,9 @@ public class Obstacle extends Thread {
                 }
                 if (!crossed && label.getY() > car.getY() + car.getCarLabel().getHeight()) {
                     crossed = true;
+                    if(isSound){
+                        obstacles.playSound("Sound/VuotVatCan.wav");
+                    }
                     obstacles.increasescore();
                 }
                 try {
@@ -124,4 +127,8 @@ public class Obstacle extends Thread {
         return score;
     }
 
+    public void setIsSound(boolean isSound) {
+        this.isSound = isSound;
+    }
+    
 }

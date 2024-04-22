@@ -1,9 +1,7 @@
 package Controller.ControllerGame;
 
 import View.Game.CarGameView;
-import View.Game.PauseGameView;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

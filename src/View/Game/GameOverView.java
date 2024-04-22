@@ -4,12 +4,12 @@ import Controller.ControllerGame.GameOverController;
 import Controller.ControllerGame.SavePointController;
 import javax.swing.*;
 import java.awt.*;
-import View.Game.ImageFactory;
-import java.awt.event.ActionListener;
+
 
 public class GameOverView extends ImageFactory {
     private CarGameView view;
     private JFrame jFrame;
+    private JLabel titleLabel;
     private JPanel jPanel_GameOverView;
     private JButton jButton_PlayAgain, jButton_Home, jButton_SavePoint;
 
@@ -23,23 +23,20 @@ public class GameOverView extends ImageFactory {
         
     }
 
-    private void init() {
+    private void init(){
         jFrame = new JFrame();
-        jFrame.setTitle("Racing UTC");
+        jFrame.setTitle("Game Over");
         jFrame.setSize(640, 700);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         jFrame.setLayout(null);
-
+        
         jPanel_GameOverView = createImagePanel("Image/Background_02.png", 0, 0, 640, 700);
 
-        JLabel titleLabel = new JLabel("Racing 2D");
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        titleLabel.setForeground(Color.WHITE);
-        titleLabel.setBounds(250, 30, 160, 30);
-        jButton_SavePoint = createButton("LƯU ĐIỂM", "Image/Button_01.png", 262, 320, 116, 40);
-        jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 262, 180, 116, 40);
-        jButton_Home = createButton("HOME", "Image/Button_01.png", 262, 460, 116, 40);
+        titleLabel = createImageLabel("", "Image/title-GameOver.png", 125, 30, 400, 150);
+        jButton_SavePoint = createButton("LƯU ĐIỂM", "Image/Button_01.png", 245, 280, 150, 50);
+        jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 245, 200, 150, 50);
+        jButton_Home = createButton("HOME", "Image/Button_01.png", 245, 360, 150, 50);
 
         jPanel_GameOverView.add(titleLabel);
         jPanel_GameOverView.add(jButton_SavePoint);
