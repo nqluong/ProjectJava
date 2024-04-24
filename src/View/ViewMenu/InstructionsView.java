@@ -29,7 +29,7 @@ public class InstructionsView extends ImageFactory {
         instruction1Label = createImageLabel("Dùng phím mũi tên hoặc hai nút A và D", "", 195, 140, 300, 30);
         instruction2Label = createImageLabel("Để di chuyển tránh chướng ngại vật", "", 195, 180, 300, 30);
         instruction3Label = createImageLabel("và ăn các đồng tiền", "", 235, 220, 170, 30);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 245, 500, 150, 50);
+        homeButton = createButton("HOME", "Image/Button_01.png", 245, 500, 150, 50);
         
         instructionsPanel.add(instruction1Label);
         instructionsPanel.add(instruction2Label);

@@ -19,7 +19,7 @@ public class HighScoreView extends ImageFactory {
 
     private void init() {
         jFrame = new JFrame();
-        jFrame.setTitle("Điểm cao");
+        jFrame.setTitle("High Score");
         jFrame.setSize(640, 700);
         jFrame.setLocationRelativeTo(null);
         jFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -27,9 +27,9 @@ public class HighScoreView extends ImageFactory {
 
         highScorePanel = createImagePanel("Image/NenCar_01.png", 0, 0, 640, 700);
 
-        playerLabel = createImageLabel("Người chơi", "", 120, 150, 80, 30);
-        scoreLabel = createImageLabel("Điểm số", "", 445, 150, 70, 30);
-        homeButton = createButton("Trang chủ", "Image/Button_01.png", 245, 500, 150, 50);
+        playerLabel = createImageLabel("Player", "", 120, 150, 80, 30);
+        scoreLabel = createImageLabel("Score", "", 445, 150, 70, 30);
+        homeButton = createButton("HOME", "Image/Button_01.png", 245, 500, 150, 50);
 
         highScorePanel.add(playerLabel);
         highScorePanel.add(scoreLabel);

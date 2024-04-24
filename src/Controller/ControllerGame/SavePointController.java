@@ -13,7 +13,6 @@ public class SavePointController {
         this.saveView = saveView;
         saveView.getjButtonSave().addActionListener(new SaveButtonListener());
     }
-    //class xử lý sự kiện khi ấn Lưu
     private class SaveButtonListener implements ActionListener{
 
         @Override

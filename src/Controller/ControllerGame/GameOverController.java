@@ -25,9 +25,6 @@ public class GameOverController {
         @Override
         public void actionPerformed(ActionEvent e) {
            overView.dispose();
-//           MainMenuView mainMenuView = new MainMenuView();
-//           new MainMenuController(mainMenuView);
-//           mainMenuView.showMainMenu();
         }
  
     }

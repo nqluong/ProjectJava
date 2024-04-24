@@ -38,9 +38,6 @@ public class PauseGameController {
         @Override
         public void actionPerformed(ActionEvent e) {
             pauseView.dispose();
-//            MainMenuView mainMenuView = new MainMenuView();
-//            MainMenuController mainMenuController =  new MainMenuController(mainMenuView);
-//            mainMenuView.showMainMenu();
         }
 
     }
@@ -51,9 +48,6 @@ public class PauseGameController {
         public void actionPerformed(ActionEvent e) {
             pauseView.dispose();
             view.resumeGame();
-            //new CarController(view);
-            
         }
-
     }
 }

@@ -111,13 +111,7 @@ public class Obstacle extends Thread {
         return flag;
     }
 
-    public boolean collision() {
-        boolean flag = false;
-        if (car.getCarLabel().getHeight() <= label.getHeight()) {
-            flag = true;
-        }
-        return flag;
-    }
+
 
     public void setObstacles(Obstacles obstacles) {
         this.obstacles = obstacles;

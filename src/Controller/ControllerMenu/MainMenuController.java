@@ -1,4 +1,3 @@
-
 package Controller.ControllerMenu;
 
 import View.ViewMenu.MainMenuView;
@@ -13,8 +12,6 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.swing.JButton;
 
-
-
 public class MainMenuController {
 
     public boolean isIsPlaying() {
@@ -27,11 +24,12 @@ public class MainMenuController {
     private MainMenuView view;
     private boolean isPlaying = true;
     private JButton soundButton;
-    
-    public MainMenuController(){
-        
+
+    public MainMenuController() {
+
     }
-    public MainMenuController(MainMenuView view){
+
+    public MainMenuController(MainMenuView view) {
         this.view = view;
         view.getHighScoreButton().addActionListener(new HighScoreButtonListener());
         view.getInstructionsButton().addActionListener(new InstructionsButtonListener());
@@ -39,47 +37,43 @@ public class MainMenuController {
         view.getStartButton().addActionListener(new StartButtonListener());
     }
 
-            
-    public class HighScoreButtonListener implements ActionListener{
+    public class HighScoreButtonListener implements ActionListener {
+
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showHighScoreView();
         }
     }
-    
-    public class InstructionsButtonListener implements ActionListener{
+
+    public class InstructionsButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showInstrctionsView();
         }
     }
-    
-    public class StartButtonListener implements ActionListener{
+
+    public class StartButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             view.showGame();
         }
     }
-    
-    public class SoundButtonListener implements ActionListener{
+
+    public class SoundButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent e) {
             if (isPlaying) {
-                    pauseSound();
-                    view.setButtonText(view.getSoundButton(), "Sound Off");
-                    isPlaying = false;
-                } else {
-                    resumeSound();
-                    view.setButtonText(view.getSoundButton(), "Sound On");
-                    isPlaying = true;
-                }
-;
+                pauseSound();
+                view.setButtonText(view.getSoundButton(), "SOUND OFF");
+                isPlaying = false;
+            } else {
+                resumeSound();
+                view.setButtonText(view.getSoundButton(), "SOUND ON");
+                isPlaying = true;
+            }
         }
-        
     }
-    
-      
-}    
+}

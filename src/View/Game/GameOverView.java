@@ -34,7 +34,7 @@ public class GameOverView extends ImageFactory {
         jPanel_GameOverView = createImagePanel("Image/Background_02.png", 0, 0, 640, 700);
 
         titleLabel = createImageLabel("", "Image/title-GameOver.png", 125, 30, 400, 150);
-        jButton_SavePoint = createButton("LƯU ĐIỂM", "Image/Button_01.png", 245, 280, 150, 50);
+        jButton_SavePoint = createButton("SAVE POINT", "Image/Button_01.png", 245, 280, 150, 50);
         jButton_PlayAgain = createButton("PLAY AGAIN", "Image/Button_01.png", 245, 200, 150, 50);
         jButton_Home = createButton("HOME", "Image/Button_01.png", 245, 360, 150, 50);
 

@@ -18,9 +18,7 @@ public class MainMenuView extends ImageFactory {
     private JLabel titleLabel;
     private static Clip clip;
     private static long clipTimePosition;
-    
     private MainMenuController mainMenuController;
-
     public MainMenuView() {
         this.init();
         jFrame.setVisible(true);

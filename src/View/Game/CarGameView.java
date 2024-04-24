@@ -108,29 +108,10 @@ public class CarGameView extends ImageFactory {
         return jLabel_Barrier_Fence;
     }
 
-    public int getCarY() {
-        return jLabel_Car.getY();
-    }
-
     public int getCoinY() {
         return jLabel_Coin.getY();
     }
     
-    public int getBarrier_CarY() {
-        return jLabel_Barrier_Car.getY();
-    }
-    
-    public int getObstacle_TwoY() {
-        return jLabelObstacle_Two.getY();
-    }
-    
-    public int getObstacle_ThreeY() {
-        return jLabelObstacle_Three.getY();
-    }
-    
-    public int getBarrier_FenceY() {
-        return jLabel_Barrier_Fence.getY();
-    }
     
 
     public void setVisible(boolean b) {
