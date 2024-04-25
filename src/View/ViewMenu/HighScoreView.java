@@ -4,8 +4,10 @@ import Controller.ControllerMenu.HighScoreController;
 import javax.swing.*;
 import java.awt.*;
 import View.Game.*;
-import com.sun.jdi.connect.spi.Connection;
-
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.*;
 public class HighScoreView extends ImageFactory {
 
     private JFrame jFrame;
@@ -36,6 +38,7 @@ public class HighScoreView extends ImageFactory {
         highScorePanel.add(homeButton);
 
         jFrame.add(highScorePanel);
+        displayHighScores();
     }
 
     public JButton getHomeButton() {
@@ -54,38 +57,38 @@ public class HighScoreView extends ImageFactory {
         jFrame.dispose();
     }
 
-//    private void displayHighScores() {
-//        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/user", "root", "root")) {
-//            String sql = "SELECT user_name, point FROM users ORDER BY point DESC LIMIT 5";
-//            try (PreparedStatement statement = connection.prepareStatement(sql)) {
-//                ResultSet resultSet = statement.executeQuery();
-//
-//                int posY = 150; // Vị trí y ban đầu của label điểm cao
-//                int labelCount = 0; // Đếm số lượng label đã tạo
-//
-//                while (resultSet.next()) {
-//                    String userName = resultSet.getString("user_name");
-//                    int point = resultSet.getInt("point");
-//
-//                    // Hiển thị thông tin người chơi trên giao diện
-//                    JLabel playerNameLabel = createImageLabel(userName, "", 100, posY, 200, 30);
-//                    JLabel playerScoreLabel = createImageLabel(String.valueOf(point), "", 400, posY, 100, 30);
-//
-//                    highScorePanel.add(playerNameLabel);
-//                    highScorePanel.add(playerScoreLabel);
-//
-//                    posY += 40; // Tăng vị trí y cho label tiếp theo
-//                    labelCount++; // Tăng biến đếm
-//
-//                    // Nếu đã hiển thị đủ 5 người chơi, thoát vòng lặp
-//                    if (labelCount >= 5) {
-//                        break;
-//                    }
-//                }
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
-//        }
-//    }
+    private void displayHighScores() {
+        try (Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/projectjava", "root", "nqluong1405")) {
+            String sql = "SELECT user_name, point FROM users ORDER BY point DESC LIMIT 5";
+            try (PreparedStatement statement = connection.prepareStatement(sql)) {
+                ResultSet resultSet = statement.executeQuery();
+
+                int posY = 200; // Vị trí y ban đầu của label điểm cao
+                int labelCount = 0; // Đếm số lượng label đã tạo
+
+                while (resultSet.next()) {
+                    String userName = resultSet.getString("user_name");
+                    int point = resultSet.getInt("point");
+
+                    // Hiển thị thông tin người chơi trên giao diện
+                    JLabel playerNameLabel = createImageLabel(userName, "", 120, posY, 200, 30);
+                    JLabel playerScoreLabel = createImageLabel(String.valueOf(point), "", 400, posY, 100, 30);
+
+                    highScorePanel.add(playerNameLabel);
+                    highScorePanel.add(playerScoreLabel);
+
+                    posY += 40; // Tăng vị trí y cho label tiếp theo
+                    labelCount++; // Tăng biến đếm
+
+                    // Nếu đã hiển thị đủ 5 người chơi, thoát vòng lặp
+                    if (labelCount >= 5) {
+                        break;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Không thể kết nối đến cơ sở dữ liệu!", "Lỗi", JOptionPane.ERROR_MESSAGE);
+        }
+    }
 }
